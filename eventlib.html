@@ -29,7 +29,6 @@
                 padding: 14px 16px;
                 text-decoration: none;
                 font-size: larger;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             }
     
             .navlinks:hover {
@@ -37,17 +36,18 @@
             }
             body {
                 background-color: #B3AAB7;
+                font-family: Georgia, 'Times New Roman', Times, serif;
             }
 
-            .login-btn {
+            .eventlib-btn {
                 float: right;
                 border-radius: 20px;
                 width: 120px;
                 height: 49px;
                 font-size: larger;
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 background-color:rgb(55, 51, 51);
                 color: white;
+                font-family: Georgia, 'Times New Roman', Times, serif;
              }
 
              .divider {
@@ -55,16 +55,111 @@
                 width: 100%;
                 margin: 60px 0;
              }
+
+             .title {
+                text-align: center;
+                font-size: xxx-large;
+
+             }
+
+             .eventlibsearchheading {
+                font-size:x-large;
+                margin-bottom: 10px;
+             }
+
+             .eventlibinput {
+                height: 40px;
+                font-size: large;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+             }
+
+             .form-row {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 10px;
+             }
+
+            .eventlibform {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            .eventlibform-row {
+                display: flex;
+                flex-direction: column;
+                margin-right: 135px;
+            }
+
+            .submit-button-container {
+                margin-top: 10px; /* Add space above the submit button */
+            }
+
+
         </style>
     </head>
     <body>
     <ul class="nav">
         <li class="navelements"><a class="navlinks" href="#Home">Home</a></li>
-        <li class="navelements"><a class="navlinks" href="#EventLibrary">Event Library</a></li>
         <li class="navelements"><a class="navlinks" href="#Schedule">Schedule</a></li>
+        <li class="navelements"><a class="navlinks" href="#EventLibrary">Event Library</a></li>
         <li class="navelements"><a class="navlinks" href="#AddEvents">Add Events</a></li>
-        <button class="login-btn">Login</button>
+        <button class="eventlib-btn">Login</button>
     </ul>
+
     <div class="divider"></div>
+
+    <h1 class="title">EVENT LIBRARY DATABASE SEARCH</h1>
+    
+    <form class="eventlibform">
+        <div class="eventlibform-row">
+          <label class="eventlibsearchheading" for="textbox">Event Description Keyword Search:</label>
+          <input class="eventlibinput" type="text" id="textbox" name="textbox">
+        </div>
+        
+        <div class="eventlibform-row">
+          <label class = "eventlibsearchheading" for="dropdown">Event Type:</label>
+          <select class = "eventlibinput"id="dropdown" name="dropdown">
+            <option value="option1">Any</option>
+            <option value="option2">Speaker</option>
+            <option value="option3">Networking</option>
+            <option value="option4">Professional Development</option>
+            <option value="option5">DEI</option>
+            <option value="option6">Fundraiser</option>
+            <option value="option7">Outreach</option>
+          </select>
+        </div>
+        
+        <div class="eventlibform-row">
+          <label class="eventlibsearchheading" for="date">Select date:</label>
+          <input class="eventlibinput" type="date" id="date" name="date">
+        </div>
+        
+        <div class="submit-btn-container">
+            <input class = "eventlib-btn"type="submit" value="Submit">
+        </div>
+      </form>
+      
+      </body>
+      
+    
+    <!-- <form>
+        <div class="form-row">
+            <label class="eventlibsearchheading"for="textbox">Enter Description Keyword Search:</label> <br>
+            <input class="eventlibtextbox" type="text" id="textbox" name="textbox">
+        </div>
+        <div class="form-row">
+            <label class="eventlibsearchheading"for="dropdown">Event Type:</label><br>
+            <select name="dropdown" id="dropdown">
+                <option value="option1">Speaker</option>
+                <option value="option2">Networking</option>
+                <option value="option3">Professional Development</option>
+                <option value="option4">DEI</option>
+                <option value="option5">Fundraiser</option>
+                <option value="option6">Outreach</option>
+            </select>
+        </div>
+    </form> -->
   </body>
 </html>
