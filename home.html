@@ -74,13 +74,6 @@
         border-radius: 10px;
       }
 
-      .form-row {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 10px;
-        justify-content: space-between;
-      }
-
       .eventlibform {
         margin: 0 auto;
         display: flex;
@@ -88,11 +81,6 @@
         justify-content: center;
         align-items: flex-end;
         padding: 0 20px;
-      }
-
-      .eventlibform-row {
-        flex: 1;
-        margin-right: 20px;
       }
 
       .submit-btn-container {
@@ -147,21 +135,6 @@
         position: relative; /* Ensure it is positioned relative for absolute positioning */
       }
 
-      .card-actions {
-        position: absolute; /* Position the buttons relative to the header */
-        top: 5px;
-        right: 5px;
-      }
-
-      .edit-btn {
-        background-color: rgb(45, 45, 128);
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin-left: 5px;
-        cursor: pointer;
-      }
       .delete-btn {
         background-color: rgb(191, 24, 24);
         color: #fff;
@@ -170,21 +143,6 @@
         padding: 5px 10px;
         margin-left: 5px;
         cursor: pointer;
-      }
-
-      .edit-btn:hover,
-      .delete-btn:hover {
-        background-color: #555;
-      }
-
-      .results-headers {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-
-      .footer-images{
-        width: 50%;
-        height:50%;
       }
     </style>
   </head>
@@ -211,7 +169,8 @@
     <br />
     <br />
     <br />
-    <div class="column-layout">
+    <div>
+      <div class="column-layout">
       <div class="column-section">
         <img src="homepage_images/wibt_logo.png" alt="WIBT logo" />
       </div>
@@ -245,12 +204,12 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="column-layout">
+    </div>
+      <!-- <div class="column-section">
         <h2 class="results">Our Team</h2>
         <div class="eventlib-result">
           <div class="column-layout">
-            <div>
+            <div class="column-section">
               <div class="florence-card-container">
                 <div style="text-align: center">
                   <img
@@ -274,8 +233,8 @@
                   President
                 </h3>
               </div>
-            </div>
-            <div>
+              </div>
+              <div class="column-section">
               <div class="florence-card-container">
                 <div style="text-align: center">
                   <img
@@ -298,8 +257,9 @@
                 >
                   Student Advisor
                 </h3>
-              </div>
+                </div>
             </div>
+            <div class="column-section">
             <div class="florence-card-container">
               <div style="text-align: center">
                 <img
@@ -322,7 +282,9 @@
               >
                 Vice President Professional Development
               </h3>
+              </div>
             </div>
+            <div class="column-section">
             <div class="florence-card-container">
               <div style="text-align: center">
                 <img
@@ -345,6 +307,7 @@
               >
                 Vice President Finance
               </h3>
+              </div>
             </div>
           </div>
         </div>
