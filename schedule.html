@@ -166,19 +166,25 @@
         flex-direction: row;
         justify-content: space-between;
         margin: 0 auto;
-        max-width: 80%;
+        width: 80%;
       }
       .schedule-card-container {
         flex: 1;
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        max-width: 30%;
+        width: 30%;
         height: 170px;
         background-color: #f9f9f9;
         overflow-y: auto;
         padding: 20px;
         margin-bottom: 20px;
         margin-top: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+      .column-layout {
+        display: flex;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -204,63 +210,65 @@
     <h1 class="title">UPCOMING EVENTS</h1>
     <br />
     <br />
-    <div class="schedule-card">
-      <div class="schedule-card-container">
-        <div class="card-header">
-          <h2 class="results-headers">Event: IBM Speaker</h2>
+    <div class="column-layout">
+      <div class="schedule-card">
+        <div class="schedule-card-container">
+          <div class="card-header">
+            <h2 class="results-headers">Event: IBM Speaker</h2>
+          </div>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Type: Speaker Event
+          </h3>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Date: 03/03/2024
+          </h3>
+          <p>
+            This event will take place on Zoom at 5pm featuring Kristyn Arends
+            from IBM. Please come prepared with questions to ask her!
+          </p>
         </div>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Type: Speaker Event
-        </h3>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Date: 03/03/2024
-        </h3>
-        <p>
-          This event will take place on Zoom at 5pm featuring Kristyn Arends
-          from IBM. Please come prepared with questions to ask her!
-        </p>
       </div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-card-container">
-        <div class="card-header">
-          <h2 class="results-headers">
-            Event: Spaulding Ridge Women Elevate Conference
-          </h2>
+      <div class="schedule-card">
+        <div class="schedule-card-container">
+          <div class="card-header">
+            <h2 class="results-headers">
+              Event: Spaulding Ridge Women Elevate Conference
+            </h2>
+          </div>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Type: Networking
+          </h3>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Date: 03/08/2024
+          </h3>
+          <p>
+            There are three sessions in this event from 10:00am-1:00pm. You can
+            attend any of the three sessions. The first session centers around
+            the power of inclusive CEOs, the second session focuses on the
+            diverse journey of women across industries, and the third session
+            talks about supporting women's success in the workplace.
+          </p>
         </div>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Type: Networking
-        </h3>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Date: 03/08/2024
-        </h3>
-        <p>
-          There are three sessions in this event from 10:00am-1:00pm. You can
-          attend any of the three sessions. The first session centers around the
-          power of inclusive CEOs, the second session focuses on the diverse
-          journey of women across industries, and the third session talks about
-          supporting women's success in the workplace.
-        </p>
       </div>
-    </div>
-    <div class="schedule-card">
-      <div class="schedule-card-container">
-        <div class="card-header">
-          <h2 class="results-headers">
-            Event: Information System Society Panel
-          </h2>
+      <div class="schedule-card">
+        <div class="schedule-card-container">
+          <div class="card-header">
+            <h2 class="results-headers">
+              Event: Information System Society Panel
+            </h2>
+          </div>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Type: Panel
+          </h3>
+          <h3 class="results-headers" style="font-style: italic">
+            Event Date: 03/11/2024
+          </h3>
+          <p>
+            This panel hosted by Information System Society will feature
+            esteemed women in technology. The event will take place in Grainger
+            5120 from 5:30pm-7:00pm with food provided or on Zoom.
+          </p>
         </div>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Type: Panel
-        </h3>
-        <h3 class="results-headers" style="font-style: italic">
-          Event Date: 03/11/2024
-        </h3>
-        <p>
-          This panel hosted by Information System Society will feature esteemed
-          women in technology. The event will take place in Grainger 5120 from
-          5:30pm-7:00pm with food provided or on Zoom.
-        </p>
       </div>
     </div>
   </body>
