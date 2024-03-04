@@ -109,18 +109,16 @@
         margin-left: 80px;
       }
 
-      .card-container {
-        position: relative;
+      .schedule-card-container {
         border-radius: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 85%;
-        height: 130px;
+        width: 40%;
+        height: 150px;
         background-color: #f9f9f9;
         overflow-y: auto;
-        padding: 10px;
+        padding: 20px;
         margin-bottom: 20px;
         margin-top: 20px;
-        position: relative;
       }
 
       .card-header {
@@ -161,6 +159,10 @@
         margin-top: 0;
         margin-bottom: 0;
       }
+      .schedule-card {
+        float: left;
+        width: 60%;
+      }
     </style>
   </head>
   <body>
@@ -185,7 +187,48 @@
     <h1 class="title">UPCOMING EVENTS</h1>
     <br />
     <br />
-    <div class="eventlib-results">
+    <div class="schedule-card">
+      <div class="schedule-card-container">
+        <div class="card-header">
+          <h2 class="results-headers">Event: IBM Speaker</h2>
+          <div class="card-actions"></div>
+        </div>
+        <h3 class="results-headers" style="font-style: italic">
+          Event Type: Speaker Event
+        </h3>
+        <h3 class="results-headers" style="font-style: italic">
+          Event Date: 03/03/2024
+        </h3>
+        <p>
+          This event will take place on Zoom at 5pm featuring Kristyn Arends
+          from IBM. Please come prepared with questions to ask her!
+        </p>
+      </div>
+    </div>
+    <div class="schedule-card">
+      <div class="schedule-card-container">
+        <div class="card-header">
+          <h2 class="results-headers">
+            Event:Spaulding Ridge Women Elevate Conference
+          </h2>
+          <div class="card-actions"></div>
+        </div>
+        <h3 class="results-headers" style="font-style: italic">
+          Event Type: Networking
+        </h3>
+        <h3 class="results-headers" style="font-style: italic">
+          Event Date: 03/08/2024
+        </h3>
+        <p>
+          There are three sessions in this event from 10:00am-1:00pm. You can
+          attend any of the three sessions. The first session centers around the
+          power of inclusive CEOs, the second session focuses on the diverse
+          journey of women across industries, and the third session talks about
+          supporting women's success in the workplace.
+        </p>
+      </div>
+    </div>
+    <!-- <div class="eventlib-results">
       <div class="card-container">
         <div class="card-header">
           <h2 class="results-headers">Event: IBM Speaker</h2>
@@ -242,6 +285,6 @@
           5:30pm-7:00pm with food provided or on Zoom.
         </p>
       </div>
-    </div>
+    </div> -->
   </body>
 </html>
