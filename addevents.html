@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,6 +19,7 @@
             align-items: center;
         }
 
+
         .navlinks {
             display: block;
             color: white;
@@ -27,9 +29,11 @@
             font-size: larger;
         }
 
+
         .navlinks:hover {
             background-color: rgb(90, 50, 90);
         }
+
 
         body {
             background-color: #b3aab7;
@@ -37,6 +41,7 @@
             margin: 0;
             padding: 0;
         }
+
 
         .enterevent-btn {
             border: none;
@@ -49,11 +54,13 @@
             cursor: pointer;
         }
 
+
         .divider {
             border: 2px solid black;
             width: 100%;
             margin: 30px 0;
         }
+
 
         .title {
             text-align: center;
@@ -62,10 +69,12 @@
             margin: 30px 0;
         }
 
+
         .addeventheading {
             font-size: x-large;
             font-weight: bold;
         }
+
 
         .addeventinput {
             height: 40px;
@@ -76,6 +85,16 @@
             border-radius: 10px;
         }
 
+        .dateinput {
+            height: 40px;
+            font-size: large;
+            font-family: Georgia, "Times New Roman", Times, serif;
+            width: 22rem;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+
         .form-row {
             display: flex;
             flex-direction: row;
@@ -83,33 +102,38 @@
             justify-content: space-between;
         }
 
+
         .addeventform {
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             align-items: flex-end;
             padding: 0 20px;
         }
+
 
         .addeventform-row {
             flex: 1;
             margin-right: 20px;
         }
 
+
         .enter-btn-container {
             margin-top: 20px;
             text-align: center;
         }
 
+
         .events {
             margin-left: 20px;
         }
+
 
         .addevent-results {
             padding: 10px;
             margin-left: 80px;
         }
+
 
         .card-container {
             position: relative;
@@ -125,16 +149,22 @@
             position: relative;
         }
 
+
         .card-header {
             position: relative;
             /* Ensure it is positioned relative for absolute positioning */
         }
+
 
         .card-actions {
             position: absolute;
             /* Position the buttons relative to the header */
             top: 5px;
             right: 5px;
+        }
+
+        .form-margin {
+            margin-left: 20px;
         }
 
         .edit-btn {
@@ -157,17 +187,32 @@
             cursor: pointer;
         }
 
+
         .edit-btn:hover,
         .delete-btn:hover {
             background-color: #555;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+            justify-content: space-between;
         }
 
         .events-headers {
             margin-top: 0;
             margin-bottom: 0;
         }
+
+        #myTextarea {
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+        }
     </style>
 </head>
+
 
 <body>
     <ul class="nav">
@@ -188,41 +233,56 @@
     <div class="divider"></div>
     <br />
 
+
     <h1 class="title">Event Information</h1>
     <br />
 
     <form class="addeventform">
-        <div class="addeventform-row">
-            <label class="addeventheading" for="textbox">Event Title:</label>
-            <input class="addeventinput" type="text" id="textbox" name="textbox" />
+        <div class="form-row">
+            <div class="addeventform-row">
+                <label class="addeventheading" for="textbox">Event Title:</label>
+                <input class="addeventinput" type="text" id="textbox" name="textbox" />
+            </div>
+
+            <div class="addeventform-row">
+                <label class="addeventheading" for="dropdown">Event Type:</label>
+                <select class="addeventinput" id="dropdown" name="dropdown">
+                    <option value="option2">Speaker</option>
+                    <option value="option3">Networking</option>
+                    <option value="option4">Professional Development</option>
+                    <option value="option5">DEI</option>
+                    <option value="option6">Fundraiser</option>
+                    <option value="option7">Outreach</option>
+                </select>
+            </div>
         </div>
 
-        <div class="addeventform-row">
-            <label class="addeventheading" for="dropdown">Event Type:</label>
-            <select class="addeventinput" id="dropdown" name="dropdown">
-                <option value="option2">Speaker</option>
-                <option value="option3">Networking</option>
-                <option value="option4">Professional Development</option>
-                <option value="option5">DEI</option>
-                <option value="option6">Fundraiser</option>
-                <option value="option7">Outreach</option>
-            </select>
-        </div>
-
-        <div class="addeventform-row">
-            <label class="addeventheading" for="date">Select date:</label>
-            <input class="addeventinput" type="date" id="date" name="date" />
-        </div>
-
-        <div class="addeventform-row">
-            <label class="addeventheading" for="textbox">Event Description:</label>
-            <input class="addeventinput" type="text" id="textbox" name="textbox" />
-        </div>
-
-        <div class="enter-btn-container">
-            <input class="enterevent-btn" type="submit" value="Enter" />
-        </div>
     </form>
+
+    <div class="events">
+        <div class="form-row">
+            <div class="addeventform-row">
+                <label class="addeventheading" for="date">Select date:</label>
+                <br>
+                <input class="dateinput" type="date" id="date" name="date" />
+            </div>
+        </div>
+
+        <div>
+            <div class="form-row">
+                <div class="addeventform-row">
+                    <label class="addeventheading" for="textbox">Event Description:</label>
+                    <textarea id="myTextarea" class="addeventinput"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="enter-btn-container">
+                    <input class="enterevent-btn" type="submit" value="Enter" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
