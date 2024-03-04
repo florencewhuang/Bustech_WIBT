@@ -109,18 +109,6 @@
         margin-left: 80px;
       }
 
-      .schedule-card-container {
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        width: 40%;
-        height: 150px;
-        background-color: #f9f9f9;
-        overflow-y: auto;
-        padding: 20px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-      }
-
       .card-header {
         position: relative; /* Ensure it is positioned relative for absolute positioning */
       }
@@ -160,8 +148,23 @@
         margin-bottom: 0;
       }
       .schedule-card {
-        float: left;
-        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 80%;
+      }
+      .schedule-card-container {
+        flex: 1;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 30%;
+        height: 170px;
+        background-color: #f9f9f9;
+        overflow-y: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
       }
     </style>
   </head>
@@ -191,7 +194,6 @@
       <div class="schedule-card-container">
         <div class="card-header">
           <h2 class="results-headers">Event: IBM Speaker</h2>
-          <div class="card-actions"></div>
         </div>
         <h3 class="results-headers" style="font-style: italic">
           Event Type: Speaker Event
@@ -211,7 +213,6 @@
           <h2 class="results-headers">
             Event:Spaulding Ridge Women Elevate Conference
           </h2>
-          <div class="card-actions"></div>
         </div>
         <h3 class="results-headers" style="font-style: italic">
           Event Type: Networking
