@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      .nav {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #84748c;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navlinks {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: larger;
+      }
+
+      .navlinks:hover {
+        background-color: rgb(90, 50, 90);
+      }
+
+      body {
+        background-color: #b3aab7;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .eventlib-btn {
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: larger;
+        background-color: #333;
+        color: white;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        cursor: pointer;
+      }
+
+      .divider {
+        border: 2px solid black;
+        width: 100%;
+        margin: 30px 0;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bolder;
+        margin: 30px 0;
+      }
+
+      .eventlibsearchheading {
+        font-size: x-large;
+        font-weight: bold;
+      }
+
+      .eventlibinput {
+        height: 40px;
+        font-size: large;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 10px;
+      }
+
+      .eventlibform {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 0 20px;
+      }
+
+      .submit-btn-container {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .results {
+        margin-left: 20px;
+      }
+      .eventlib-results {
+        padding: 10px;
+        margin-left: 80px;
+      }
+
+      .card-container {
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 85%;
+        height: 130px;
+        background-color: #f9f9f9;
+        overflow-y: auto;
+        padding: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .florence-card-container {
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        overflow-y: auto;
+        padding: 10px;
+        margin: 5px;
+      }
+
+      .column-layout {
+        display: flex;
+        padding: 10px;
+      }
+      .column-section {
+        position: relative;
+        border-radius: 10px;
+        margin: 5px;
+        flex: auto;
+      }
+
+      .card-header {
+        position: relative; /* Ensure it is positioned relative for absolute positioning */
+      }
+
+      .delete-btn {
+        background-color: rgb(191, 24, 24);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="nav">
+      <li class="navelements"><a class="navlinks" href="#Home">Home</a></li>
+      <li class="navelements">
+        <a class="navlinks" href="#Schedule">Schedule</a>
+      </li>
+      <li class="navelements">
+        <a class="navlinks" href="#EventLibrary">Event Library</a>
+      </li>
+      <li class="navelements">
+        <a class="navlinks" href="#AddEvents">Add Events</a>
+      </li>
+      <button class="eventlib-btn">Login</button>
+    </ul>
+    <br />
+    <br />
+    <div class="divider"></div>
+    <br />
+
+    <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+    <br />
+    <br />
+    <br />
+    <div>
+      <div class="column-layout">
+      <div class="column-section">
+        <img src="homepage_images/wibt_logo.png" alt="WIBT logo" />
+      </div>
+      <div class="column-section">
+        <h2 class="results">About Us</h2>
+        <div class="eventlib-results">
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="results-headers">Our Club</h3>
+            </div>
+            <p>
+              WIBT (Women in Business Technology) is a club at the University of
+              Wisconsin-Madison. The club strives to increase female
+              representation and break down barriers in the Business Technology
+              industry, shaping the future environment for women entering the
+              field. This is accomplished through different events held within
+              the club including hosting speakers, networking events,
+              professional development, DEI (diversity, equity, and inclusion),
+              and community service.
+            </p>
+          </div>
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="results-headers">Our Purpose</h3>
+            </div>
+            <p>
+              In creating this information systems database, having a resource
+              where members can easily access events would allow for an easy
+              retrieval of information to look back on.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- <div class="column-section">
+        <h2 class="results">Our Team</h2>
+        <div class="eventlib-result">
+          <div class="column-layout">
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Zuzinec_Headshot.png"
+                    alt="Jaden Zuzinec picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Jaden Zuzinec
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  President
+                </h3>
+              </div>
+              </div>
+              <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Nowak_Headshot.png"
+                    alt="Bella Nowak picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Bella Nowak
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Student Advisor
+                </h3>
+                </div>
+            </div>
+            <div class="column-section">
+            <div class="florence-card-container">
+              <div style="text-align: center">
+                <img
+                  src="homepage_images/Appiani_Headshot.png"
+                  alt="Camilla Appiani picture"
+                  style="text-align: center"
+                  width="200"
+                  height="200"
+                />
+              </div>
+              <div class="card-header">
+                <h2 class="results-headers" style="text-align: center">
+                  Camilla Appiani
+                </h2>
+              </div>
+              <h3
+                class="results-headers"
+                style="text-align: center"
+                style="font-style: italic"
+              >
+                Vice President Professional Development
+              </h3>
+              </div>
+            </div>
+            <div class="column-section">
+            <div class="florence-card-container">
+              <div style="text-align: center">
+                <img
+                  src="homepage_images/Chahl_Headshot.png"
+                  alt="Jaspreet Chahl picture"
+                  style="text-align: center"
+                  width="200"
+                  height="200"
+                />
+              </div>
+              <div class="card-header">
+                <h2 class="results-headers" style="text-align: center">
+                  Jaspreet Chahl
+                </h2>
+              </div>
+              <h3
+                class="results-headers"
+                style="text-align: center"
+                style="font-style: italic"
+              >
+                Vice President Finance
+              </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="eventlib-result">
+          <div class="column-layout">
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Pawlenty_Headshot.png"
+                    alt="Taylor Pawlenty picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Taylor Pawlenty
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice Present External Relations
+                </h3>
+              </div>
+            </div>
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/White_Headshot.png"
+                    alt="Maeve White picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Maeve White
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President Member Communications
+                </h3>
+              </div>
+            </div>
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Vitou_Headshot.png"
+                    alt="Abby Vitou picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Abby Vitou
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President Internal Relations
+                </h3>
+              </div>
+            </div>
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Yang_Headshot.png"
+                    alt="Michelle Yang picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Michelle Yang
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President Community Service
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="eventlib-result">
+          <div class="column-layout">
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Sievert_Headshot.png"
+                    alt="Alexa Sievert picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Alexa Sievert
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President Recruitment
+                </h3>
+              </div>
+            </div>
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/Kindloskar_Headshot.png"
+                    alt="Simran Kindloskar picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Simran Kindloskar
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President DEI
+                </h3>
+              </div>
+            </div>
+            <div class="column-section">
+              <div class="florence-card-container">
+                <div style="text-align: center">
+                  <img
+                    src="homepage_images/jaya_headshot.jpeg"
+                    alt="Jaya Sabharwal picture"
+                    style="text-align: center"
+                    width="200"
+                    height="200"
+                  />
+                </div>
+                <div class="card-header">
+                  <h2 class="results-headers" style="text-align: center">
+                    Jaya Sabharwal
+                  </h2>
+                </div>
+                <h3
+                  class="results-headers"
+                  style="text-align: center"
+                  style="font-style: italic"
+                >
+                  Vice President DEI
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="column-section">
+        <h1>Contact Us</h1>
+        <p ><form class="eventlibform">
+          <div>
+            <label class="eventlibsearchheading" for="textbox"
+              >Name</label
+            >
+            <input class="eventlibinput" type="text" id="textbox" name="textbox" placeholder="Name"/>
+          </div>
+          <div>
+            <label class="eventlibsearchheading" for="textbox"
+              >Email</label
+            >
+            <input class="eventlibinput" type="text" id="textbox" name="textbox" placeholder="Email"/>
+          </div>
+
+          <form class="eventlibform">
+            <div>
+              <label class="eventlibsearchheading" for="textbox"
+                >Message</label
+              >
+              <input class="eventlibinput" type="text" id="textbox" name="textbox" placeholder="Enter a message"/>
+            </div>
+          <div class="submit-btn-container">
+            <input class="eventlib-btn" type="submit" value="Submit" />
+          </div>
+        </form></p>
+      </div> -->
+    </div>
+    <div class="divider"></div>
+    <div style="text-align: center">
+      <a href="https://www.instagram.com/wibtuwmadison/"
+    ><img src="homepage_images/instagram.png" alt="Instagram" width="3.5%" 
+  /></a>  
+      <a href="https://www.linkedin.com/company/wibt-uwmadison/"
+        ><img src="homepage_images/linkedin copy.png" alt="LinkedIn" width="3%" /></a>
+    <a href="https://flare-event.app.link/FdOMMS1gHHb"></a><img src="homepage_images/flare.png" alt="Flare" width="3%" style="margin-bottom: 2px" /></a>
+    
+  </div>
+  </body>
+</html>
