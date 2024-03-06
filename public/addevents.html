@@ -75,6 +75,15 @@
         border-radius: 10px;
       }
 
+      .dateinput {
+        height: 40px;
+        font-size: large;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        width: 22rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+      }
+
       .form-row {
         display: flex;
         flex-direction: row;
@@ -86,7 +95,6 @@
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         align-items: flex-end;
         padding: 0 20px;
       }
@@ -136,6 +144,10 @@
         right: 5px;
       }
 
+      .form-margin {
+        margin-left: 20px;
+      }
+
       .edit-btn {
         background-color: rgb(45, 45, 128);
         color: #fff;
@@ -161,9 +173,22 @@
         background-color: #555;
       }
 
+      .form-row {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        justify-content: space-between;
+      }
+
       .events-headers {
         margin-top: 0;
         margin-bottom: 0;
+      }
+
+      #myTextarea {
+        width: 100%;
+        height: 200px;
+        resize: vertical;
       }
 
       .eventlib-btn {
@@ -198,66 +223,59 @@
     <div class="divider"></div>
     <br />
 
-    <h1 class="title">ADD AN EVENT</h1>
+    <h1 class="title">Event Information</h1>
     <br />
 
     <form class="addeventform">
-      <div class="addeventform-row">
-        <label class="addeventheading" for="textbox">Event Title:</label>
-        <input class="addeventinput" type="text" id="textbox" name="textbox" />
-      </div>
+      <div class="form-row">
+        <div class="addeventform-row">
+          <label class="addeventheading" for="textbox">Event Title:</label>
+          <input
+            class="addeventinput"
+            type="text"
+            id="textbox"
+            name="textbox"
+          />
+        </div>
 
-      <div class="addeventform-row">
-        <label class="addeventheading" for="dropdown">Event Type:</label>
-        <select class="addeventinput" id="dropdown" name="dropdown">
-          <option value="option2">Speaker</option>
-          <option value="option3">Networking</option>
-          <option value="option4">Professional Development</option>
-          <option value="option5">DEI</option>
-          <option value="option6">Fundraiser</option>
-          <option value="option7">Outreach</option>
-        </select>
-      </div>
-
-      <div class="addeventform-row">
-        <label class="addeventheading" for="textbox">Event Description:</label>
-        <input class="addeventinput" type="text" id="textbox" name="textbox" />
-      </div>
-
-      <div class="addeventform-row">
-        <label class="addeventheading" for="date">Select date:</label>
-        <input class="addeventinput" type="date" id="date" name="date" />
-      </div>
-
-      <div class="enter-btn-container">
-        <input class="enterevent-btn" type="submit" value="Enter" />
+        <div class="addeventform-row">
+          <label class="addeventheading" for="dropdown">Event Type:</label>
+          <select class="addeventinput" id="dropdown" name="dropdown">
+            <option value="option2">Speaker</option>
+            <option value="option3">Networking</option>
+            <option value="option4">Professional Development</option>
+            <option value="option5">DEI</option>
+            <option value="option6">Fundraiser</option>
+            <option value="option7">Outreach</option>
+          </select>
+        </div>
       </div>
     </form>
 
-    <br />
-    <br />
-    <h2 class="events">Events:</h2>
-    <div class="addevent-results">
-      <div class="card-container">
-        <div class="card-header">
-          <h2 class="events-headers">Event: Coffee & Bagels Social</h2>
-          <div class="card-actions">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+    <div class="events">
+      <div class="form-row">
+        <div class="addeventform-row">
+          <label class="addeventheading" for="date">Select date:</label>
+          <br />
+          <input class="dateinput" type="date" id="date" name="date" />
+        </div>
+      </div>
+
+      <div>
+        <div class="form-row">
+          <div class="addeventform-row">
+            <label class="addeventheading" for="textbox"
+              >Event Description:</label
+            >
+            <textarea id="myTextarea" class="addeventinput"></textarea>
           </div>
         </div>
-        <h3 class="events-headers" style="font-style: italic">
-          Event Type: Networking
-        </h3>
-        <h3 class="enters-headers" style="font-style: italic">
-          Event Date: 02/25/2024
-        </h3>
-        <p>
-          For this event we catered bagels and coffee from Einstein Bros Bagels.
-          We also did a speed networking activity with pre-written questions
-          that you had to ask one another depending on what you and your
-          partner's die landed on.
-        </p>
+
+        <div class="form-row">
+          <div class="enter-btn-container">
+            <input class="enterevent-btn" type="submit" value="Enter" />
+          </div>
+        </div>
       </div>
     </div>
   </body>
