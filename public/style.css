@@ -87,7 +87,6 @@ body {
 
 .eventlib-results {
   padding: 10px;
-  margin-left: 80px;
 }
 
 .homecard-container {
@@ -118,11 +117,17 @@ body {
   padding: 10px;
 }
 
-.column-section {
+/* .column-section {
   position: relative;
   border-radius: 10px;
-  margin: 5px;
+  margin: 5px; 
   flex: auto;
+} */
+
+#homeIMG{
+  text-align: center;
+
+
 }
 
 .card-header {
@@ -309,3 +314,16 @@ body {
   height: 200px;
   resize: vertical;
 }
+
+p {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+h1{
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+ul{
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+

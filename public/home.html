@@ -6,7 +6,9 @@
     <title>Home Page</title>
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   </head>
+
   <body>
     <ul class="nav">
       <li class="navelements"><a class="navlinks" href="home.html">Home</a></li>
@@ -19,7 +21,7 @@
       <li class="navelements">
         <a class="navlinks" href="addevents.html">Add Events</a>
       </li>
-      <button class="eventlib-btn">Login</button>
+      <button class="eventlib-btn" id="login">Login</button>
     </ul>
     <br />
     <br />
@@ -31,11 +33,13 @@
     <br />
     <br />
     <div>
-      <div class="column-layout">
-        <div class="column-section">
-          <img src="images/wibt_logo.png" alt="WIBT logo" />
+      <div class=" columns">
+        <div class="column" id="homeIMG">
+          <img src="images/logo.png" alt="WIBT logo"/>
         </div>
-        <div class="column-section">
+          
+
+        <div class="column-section column">
           <h2 class="results">About Us</h2>
           <div class="eventlib-results">
             <div class="homecard-container">
@@ -82,5 +86,78 @@
           style="margin-bottom: 2px"
       /></a>
     </div>
+
+    <div class="modal" id="modalHome">
+      <div class="modal-background" id="modalBG"></div>
+      <div class="modal-content has-background-grey-light p-4">
+        <h1 class="subtitle">Login</h1>
+        <form id="signup_form">
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control">
+              <input class="input" type="text" id="user_name" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" id="main_pass" />
+            </div>
+          </div>
+        </form>
+          <button id="signUp_btn" class="button is-primary mt-1 mr-3">Submit</button>
+          <button id="signup_reset" class="button is-danger mt-1">Reset</button>
+          <button id="create_acct" class="button is-success mt-1">Create an Account</button>
+          </div>
+          <div id="passwordcheck"></div>
+      </div>
+
+  <!--New Sign Up Account-->
+    <div class="modal" id="modalnewAcct">
+      <div class="modal-background" id="modalBG_new"></div>
+      <div class="modal-content has-background-grey-light p-4">
+        <h1 class="subtitle">Create an Account</h1>
+        <form id="new_acct_form">
+
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control">
+              <input class="input" type="text" id="user_name_new" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signup_email_new" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" id="main_pass_new" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Confirm Password</label>
+            <div class="control">
+              <input class="input" type="password" id="check_pass_new" />
+            </div>
+          </div>
+
+          <div id="passwordcheck"></div>
+        </form>
+
+        <button id="new_btn" class="button is-primary mt-1 mr-3">Submit</button>
+        <button id="signup_reset_new" class="button is-danger mt-1">Reset</button>
+
+      </div>
+    </div>
+
   </body>
+
+  <script src="app.js"></script>
 </html>
