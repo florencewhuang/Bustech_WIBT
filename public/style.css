@@ -83,10 +83,11 @@ body {
 
 .results {
   margin-left: 20px;
+  font-weight: bold;
 }
 
 .eventlib-results {
-  padding: 10px;
+  margin-left: 90px;
 }
 
 .homecard-container {
@@ -94,12 +95,13 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 85%;
-  height: 130px;
+  height: 150px;
   background-color: #f9f9f9;
   padding: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
   position: relative;
+  overflow-y: auto;
 }
 
 .florence-card-container {
@@ -124,10 +126,8 @@ body {
   flex: auto;
 } */
 
-#homeIMG{
+#homeIMG {
   text-align: center;
-
-
 }
 
 .card-header {
@@ -147,6 +147,10 @@ body {
 .results-headers {
   margin-top: 0;
   margin-bottom: 0;
+  font-style: italic;
+}
+.event-title {
+  font-weight: bold;
 }
 
 .schedule-card {
@@ -161,7 +165,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 30%;
-  height: 250px;
+  height: 400px;
   background-color: #f9f9f9;
   overflow-y: auto;
   padding: 20px;
@@ -198,7 +202,7 @@ body {
   position: relative;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 85%;
+  width: 93%;
   height: 130px;
   background-color: #f9f9f9;
   overflow-y: auto;
@@ -207,11 +211,16 @@ body {
   margin-top: 20px;
   position: relative;
 }
+.results-flex {
+  display: flex;
+  justify-content: space-between;
+}
 
-.card-actions {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+.event-flex {
+  flex-basis: 90%;
+}
+.edit-delete-buttons {
+  justify-content: flex-start;
 }
 
 .edit-btn {
@@ -319,11 +328,10 @@ p {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-h1{
+h1 {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-ul{
+ul {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
-
