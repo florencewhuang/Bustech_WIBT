@@ -70,10 +70,10 @@
       <div class="card-container">
         <div class="results-flex">
           <div class="event-flex">
-            <h3 class="event-title">Event: Coffee & Bagels Social</h3>
-            <h3 class="results-headers">Event Type: Networking</h3>
-            <h3 class="results-headers">Latest Event Date: 02/25/2024</h3>
-            <p>
+            <h3 class="event-title">Event: <span id="event-title">Coffee & Bagels Social</span></h3>
+            <h3 class="results-headers">Event Type: <span id="event-type-text">Networking</span></h3>
+            <h3 class="results-headers">Latest Event Date: <span id="event-date-text">02/25/2024</span></h3>
+            <p id="event-description">
               For this event we catered bagels and coffee from Einstein Bros Bagels.
               We also did a speed networking activity with pre-written questions
               that you had to ask one another depending on what you and your
@@ -81,9 +81,77 @@
             </p>
           </div>
           <div class="edit-delete-buttons">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+            <button class="edit-btn" id="edit-button">Edit</button>
+            <button class="delete-btn" id="delete-button">Delete</button>
           </div>
+          <!-- Edit Event 1 Modal -->
+          <div class="modal" id="edit-modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Edit Event</p>
+                <button class="delete" aria-label="close" id="close-modal"></button>
+              </header>
+              <section class="modal-card-body">
+                <form id="edit-event-form">
+                  <div class="field">
+                    <label class="label">Event Title</label>
+                    <div class="control">
+                      <input
+                        class="input"
+                        type="text"
+                        id="edit-event-title"
+                        name="edit-event-title"
+                      />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Event Type</label>
+                    <div class="control">
+                      <div class="select">
+                        <select id="edit-event-type" name="edit-event-type">
+                          <option value="Speaker">Speaker</option>
+                          <option value="Workshop">Networking</option>
+                          <option value="Seminar">Professional Development</option>
+                          <option value="Seminar">DEI</option>
+                          <option value="Seminar">Fundraiser</option>
+                          <option value="Seminar">Outreach</option>
+                          <!-- Add more options as needed -->
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Latest Event Date</label>
+                    <div class="control">
+                      <input
+                        class="input"
+                        type="date"
+                        id="edit-event-date"
+                        name="edit-event-date"
+                      />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Event Description</label>
+                    <div class="control">
+                      <textarea
+                        class="textarea"
+                        id="edit-event-description"
+                        name="edit-event-description"
+                        rows="4"
+                        cols="50"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="button is-primary">
+                    Save Changes
+                  </button>
+                </form>
+              </section>
+            </div>
+          </div>
+          <!-- Events Continue -->
 
         </div>
         </div>
@@ -153,4 +221,5 @@
       <br />
     </div>
   </body>
+  <script src="script.js"></script>
 </html>
