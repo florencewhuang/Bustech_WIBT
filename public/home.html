@@ -99,10 +99,16 @@
       <br />
     </div>
 
+
+    <!-- Login Modal -->
     <div class="modal" id="modalHome">
       <div class="modal-background" id="modalBG"></div>
-      <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Login</h1>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Admin Login</p>
+          <button class="delete" aria-label="close" id="close-modal"></button>
+        </header>
+        <section class="modal-card-body">
         <form id="signup_form">
           <div class="field">
             <label class="label">Username</label>
@@ -118,59 +124,14 @@
             </div>
           </div>
         </form>
+        <br>
         <button id="signUp_btn" class="button is-primary mt-1 mr-3">
           Submit
         </button>
         <button id="signup_reset" class="button is-danger mt-1">Reset</button>
-        <button id="create_acct" class="button is-success mt-1">
-          Create an Account
-        </button>
       </div>
+    </section>
       <div id="passwordcheck"></div>
-    </div>
-
-    <!--New Sign Up Account-->
-    <div class="modal" id="modalnewAcct">
-      <div class="modal-background" id="modalBG_new"></div>
-      <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Create an Account</h1>
-        <form id="new_acct_form">
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control">
-              <input class="input" type="text" id="user_name_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" type="email" id="signup_email_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" id="main_pass_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Confirm Password</label>
-            <div class="control">
-              <input class="input" type="password" id="check_pass_new" />
-            </div>
-          </div>
-
-          <div id="passwordcheck"></div>
-        </form>
-
-        <button id="new_btn" class="button is-primary mt-1 mr-3">Submit</button>
-        <button id="signup_reset_new" class="button is-danger mt-1">
-          Reset
-        </button>
-      </div>
     </div>
   </body>
   <script src="app.js"></script>
