@@ -90,7 +90,7 @@
     <div class="modal" id="modalHome">
       <div class="modal-background" id="modalBG"></div>
       <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Login</h1>
+        <h1 class="subtitle">Login with Executive Credentials</h1>
         <form id="signup_form">
           <div class="field">
             <label class="label">Username</label>
@@ -108,56 +108,12 @@
         </form>
           <button id="signUp_btn" class="button is-primary mt-1 mr-3">Submit</button>
           <button id="signup_reset" class="button is-danger mt-1">Reset</button>
-          <button id="create_acct" class="button is-success mt-1">Create an Account</button>
           </div>
           <div id="passwordcheck"></div>
       </div>
-
-  <!--New Sign Up Account-->
-    <div class="modal" id="modalnewAcct">
-      <div class="modal-background" id="modalBG_new"></div>
-      <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Create an Account</h1>
-        <form id="new_acct_form">
-
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control">
-              <input class="input" type="text" id="user_name_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" type="email" id="signup_email_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" id="main_pass_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Confirm Password</label>
-            <div class="control">
-              <input class="input" type="password" id="check_pass_new" />
-            </div>
-          </div>
-
-          <div id="passwordcheck"></div>
-        </form>
-
-        <button id="new_btn" class="button is-primary mt-1 mr-3">Submit</button>
-        <button id="signup_reset_new" class="button is-danger mt-1">Reset</button>
-
-      </div>
-    </div>
 
   </body>
+  <script src="app.js"></script>
    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -211,5 +167,4 @@ let db = firebase.firestore();
     </script>
     
     <!-- make sure to add your own js file as the last line in index.html file -->
-    <script src="app.js"></script>
 </html>

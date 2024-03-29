@@ -1,3 +1,4 @@
+auth.signOut();
 function r_e(id){
   return document.querySelector(`#${id}`);
 };
@@ -31,3 +32,23 @@ create_acct.addEventListener('click', () => {
 modalBG_new.addEventListener('click', () =>{
   modalnewAcct.classList.remove('is-active')
 });
+
+//import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+sign_in = r_c('signUp_btn');
+
+sign_in.addEventListener('click', () => {
+
+});
+
+const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
