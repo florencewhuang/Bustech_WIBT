@@ -20,7 +20,7 @@
       <li class="navelements">
         <a class="navlinks" href="addevents.html">Add Events</a>
       </li>
-      <button class="eventlib-btn">Login</button>
+      <button class="eventlib-btn" id="login">Login</button>
     </ul>
     <br />
     <br />
@@ -30,27 +30,27 @@
     <h1 class="title">Event Information</h1>
     <br />
 
-    <form class="addeventform">
+    <form class="addeventform" id="addeventform">
       <div class="form-row">
         <div class="addeventform-row">
           <label class="addeventheading" for="textbox">Event Title:</label>
           <input
             class="addeventinput"
             type="text"
-            id="textbox"
+            id="add_name"
             name="textbox"
           />
         </div>
 
         <div class="addeventform-row">
           <label class="addeventheading" for="dropdown">Event Type:</label>
-          <select class="addeventinput" id="dropdown" name="dropdown">
-            <option value="option2">Speaker</option>
-            <option value="option3">Networking</option>
-            <option value="option4">Professional Development</option>
-            <option value="option5">DEI</option>
-            <option value="option6">Fundraiser</option>
-            <option value="option7">Outreach</option>
+          <select class="addeventinput" id="add_dropdown" name="dropdown">
+            <option value="Speaker">Speaker</option>
+            <option value="Networking">Networking</option>
+            <option value="PD">Professional Development</option>
+            <option value="DEI">DEI</option>
+            <option value="Fundraiser">Fundraiser</option>
+            <option value="Outreach">Outreach</option>
           </select>
         </div>
       </div>
@@ -61,7 +61,7 @@
         <div class="addeventform-row">
           <label class="addeventheading" for="date">Select date:</label>
           <br />
-          <input class="dateinput" type="date" id="date" name="date" />
+          <input class="dateinput" type="date" id="add_date" name="date" />
         </div>
       </div>
 
@@ -71,16 +71,49 @@
             <label class="addeventheading" for="textbox"
               >Event Description:</label
             >
-            <textarea id="myTextarea" class="addeventinput"></textarea>
+            <textarea id="add_description" class="addeventinput"></textarea>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="enter-btn-container">
-            <input class="enterevent-btn" type="submit" value="Enter" />
-          </div>
-        </div>
+        <button class="eventlib-btn" id="add_enter">Enter</button>
       </div>
     </div>
   </body>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+    <script>
+      // TODO
+      // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBT1IfVQ8NsiWdxvTtXVxB6oZwvbl_9zjY",
+      authDomain: "bustechwibt.firebaseapp.com",
+      projectId: "bustechwibt",
+      storageBucket: "bustechwibt.appspot.com",
+      messagingSenderId: "91331690142",
+      appId: "1:91331690142:web:f1425da7488e45176d458f",
+      measurementId: "G-V4LNSC9VY1"
+};
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+    </script>
+    <!-- make sure to add your own js file as the last line in index.html file -->
+    <script src="addevent.js"></script>
+
 </html>
