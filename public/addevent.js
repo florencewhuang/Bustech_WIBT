@@ -9,7 +9,7 @@ function r_e(id) {
     if(event_type=="Networking"){
       return('images/networking_icon.png')
     };
-    if(event_type=='Professional Development'){
+    if(event_type=='PD'){
       return('images/professional_development_icon.png')
     };
     if(event_type=='DEI'){
