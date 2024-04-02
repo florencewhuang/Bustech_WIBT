@@ -6,10 +6,6 @@
     <title>Add Events</title>
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
   </head>
 
   <body>
@@ -31,7 +27,7 @@
     <div class="divider"></div>
     <br />
 
-    <h1 class="title">EVENT INFORMATION</h1>
+    <h1 class="title">Event Information</h1>
     <br />
 
     <form class="addeventform" id="addeventform">
@@ -72,12 +68,17 @@
           <label class="addeventheading" for="textbox"
             >Event Description:</label
           >
-          <textarea id="add_description" class="addeventinput"></textarea>
+          <textarea
+            style="width: 230%; height: 70%"
+            id="add_description"
+            class="addeventinput"
+          ></textarea>
         </div>
       </div>
     </form>
-
-    <button class="eventlib-btn" id="add_enter">Enter</button>
+    <div class="submit-container">
+      <button class="eventlib-btn" id="add_enter">Enter</button>
+    </div>
   </body>
 
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
