@@ -31,15 +31,20 @@
 
     <form class="eventlibform">
       <div class="eventlibform-row">
-        <label class="eventlibsearchheading" for="textbox"
-          >Event Keyword Search:</label
-        >
-        <input class="eventlibinput" type="text" id="textbox" name="textbox" />
+        <label class="eventlibsearchheading" for="textbox">
+          Event Keyword Search:
+        </label>
+        <input
+          class="eventlibinput"
+          type="text"
+          id="keyword_search"
+          name="textbox"
+        />
       </div>
 
       <div class="eventlibform-row">
         <label class="eventlibsearchheading" for="dropdown">Event Type:</label>
-        <select class="eventlibinput" id="dropdown" name="dropdown">
+        <select class="eventlibinput" id="typesearch_dropdown" name="dropdown">
           <option value="option1">Any</option>
           <option value="option2">Speaker</option>
           <option value="option3">Networking</option>
@@ -52,11 +57,16 @@
 
       <div class="eventlibform-row">
         <label class="eventlibsearchheading" for="date">Select date:</label>
-        <input class="eventlibinput" type="date" id="date" name="date" />
+        <input class="eventlibinput" type="date" id="search_date" name="date" />
       </div>
 
       <div class="submit-btn-container">
-        <input class="eventlib-btn" type="submit" value="Submit" />
+        <input
+          class="eventlib-btn"
+          type="submit"
+          value="Submit"
+          id="submit_search"
+        />
       </div>
     </form>
     <br />
@@ -131,4 +141,40 @@
       </div>
     </div>
   </body>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+  <script>
+    // TODO
+    // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBT1IfVQ8NsiWdxvTtXVxB6oZwvbl_9zjY",
+      authDomain: "bustechwibt.firebaseapp.com",
+      projectId: "bustechwibt",
+      storageBucket: "bustechwibt.appspot.com",
+      messagingSenderId: "91331690142",
+      appId: "1:91331690142:web:f1425da7488e45176d458f",
+      measurementId: "G-V4LNSC9VY1",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // define authentication variable
+    let auth = firebase.auth();
+    let db = firebase.firestore();
+  </script>
+  <!-- make sure to add your own js file as the last line in index.html file -->
+  <script src="eventlib.js"></script>
 </html>
