@@ -13,6 +13,8 @@ function r_e(id) {
     .then((data) => {
       let mydocs = data.docs;
 
+      //console.log(mydocs.length);
+
       let html = ``;
       mydocs.forEach((doc) => {
         html += `
