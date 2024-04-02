@@ -42,10 +42,12 @@
         </div>
 
         <div class="column-section column">
-          <h2 class="results">About The Site</h2>
+          <h2 class="results">About Us</h2>
           <div class="eventlib-results">
             <div class="homecard-container">
-              <h3 class="event-title">Our Club</h3>
+              <div class="card-header">
+                <h3 class="results-headers">Our Club</h3>
+              </div>
               <p>
                 WIBT is a club at the University of Wisconsin-Madison. The club
                 strives to increase female representation and break down
@@ -55,22 +57,15 @@
               </p>
             </div>
             <div class="homecard-container">
-              <h3 class="event-title">Our Purpose</h3>
+              <div class="card-header">
+                <h3 class="results-headers">Our Purpose</h3>
+              </div>
               <p>
                 In creating this information systems database, having a resource
                 where members can easily access events allows for an easy
                 retrieval of information from past events which can be seen in
                 the Event Libarary. Additionally, click the Schedule tab to see
                 upcoming events.
-              </p>
-            </div>
-            <div class="homecard-container">
-              <h3 class="event-title">Admin</h3>
-              <p>
-                Login using the proper admin credentials to have the ability to
-                add events to the database. Once logged in you will also have
-                the ability to edit or delete events that have already been
-                stored in the database.
               </p>
             </div>
           </div>
@@ -92,17 +87,12 @@
           width="3%"
           style="margin-bottom: 2px"
       /></a>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
 
     <div class="modal" id="modalHome">
       <div class="modal-background" id="modalBG"></div>
       <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Login</h1>
+        <h1 class="subtitle">Login with Executive Credentials</h1>
         <form id="signup_form">
           <div class="field">
             <label class="label">Username</label>
@@ -122,56 +112,44 @@
           Submit
         </button>
         <button id="signup_reset" class="button is-danger mt-1">Reset</button>
-        <button id="create_acct" class="button is-success mt-1">
-          Create an Account
-        </button>
       </div>
       <div id="passwordcheck"></div>
     </div>
-
-    <!--New Sign Up Account-->
-    <div class="modal" id="modalnewAcct">
-      <div class="modal-background" id="modalBG_new"></div>
-      <div class="modal-content has-background-grey-light p-4">
-        <h1 class="subtitle">Create an Account</h1>
-        <form id="new_acct_form">
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control">
-              <input class="input" type="text" id="user_name_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control">
-              <input class="input" type="email" id="signup_email_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" id="main_pass_new" />
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Confirm Password</label>
-            <div class="control">
-              <input class="input" type="password" id="check_pass_new" />
-            </div>
-          </div>
-
-          <div id="passwordcheck"></div>
-        </form>
-
-        <button id="new_btn" class="button is-primary mt-1 mr-3">Submit</button>
-        <button id="signup_reset_new" class="button is-danger mt-1">
-          Reset
-        </button>
-      </div>
-    </div>
   </body>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+
+  <script>
+    // TODO
+    // Copy **only** your firebaseConfig from Google Firebae and add it below
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBT1IfVQ8NsiWdxvTtXVxB6oZwvbl_9zjY",
+      authDomain: "bustechwibt.firebaseapp.com",
+      projectId: "bustechwibt",
+      storageBucket: "bustechwibt.appspot.com",
+      messagingSenderId: "91331690142",
+      appId: "1:91331690142:web:f1425da7488e45176d458f",
+      measurementId: "G-V4LNSC9VY1",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // define authentication variable
+    let auth = firebase.auth();
+    let db = firebase.firestore();
+  </script>
+  <!-- make sure to add your own js file as the last line in index.html file -->
   <script src="app.js"></script>
 </html>
