@@ -14,15 +14,17 @@
 
   <body>
     <ul class="nav">
-      <li class="navelements"><a class="navlinks" href="home.html">Home</a></li>
       <li class="navelements">
-        <a class="navlinks" href="schedule.html">Schedule</a>
+        <a id="homepage" class="navlinks">Home</a>
       </li>
       <li class="navelements">
-        <a class="navlinks" href="eventlib.html">Event Library</a>
+        <a id="schedulepage" class="navlinks">Schedule</a>
       </li>
       <li class="navelements">
-        <a class="navlinks" href="addevents.html">Add Events</a>
+        <a id="eventlibpage" class="navlinks">Event Library</a>
+      </li>
+      <li class="navelements">
+        <a id="addeventspage" class="navlinks">Add Events</a>
       </li>
       <button class="eventlib-btn" id="login">Login</button>
     </ul>
@@ -30,49 +32,55 @@
     <br />
     <div class="divider"></div>
     <br />
+    <div id="content_page">
+      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+      <br />
+      <br />
+      <br />
+      <div>
+        <div class="columns">
+          <div class="column" id="homeIMG">
+            <img src="images/logo.png" alt="WIBT logo" />
+          </div>
 
-    <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
-    <br />
-    <br />
-    <br />
-    <div>
-      <div class="columns">
-        <div class="column" id="homeIMG">
-          <img src="images/logo.png" alt="WIBT logo" />
-        </div>
-
-        <div class="column-section column">
-          <h2 class="results">About Us</h2>
-          <div class="eventlib-results">
-            <div class="homecard-container">
-              <div class="card-header">
-                <h3 class="results-headers">Our Club</h3>
+          <div class="column-section column">
+            <h2 class="results">About Us</h2>
+            <div class="eventlib-results">
+              <div class="homecard-container">
+                <div class="card-header">
+                  <h3 class="results-headers">Our Club</h3>
+                </div>
+                <p>
+                  WIBT is a club at the University of Wisconsin-Madison. The
+                  club strives to increase female representation and break down
+                  barriers in the Business Technology industry, shaping the
+                  future environment for women entering the field. This is
+                  accomplished through different events held within the club.
+                </p>
               </div>
-              <p>
-                WIBT is a club at the University of Wisconsin-Madison. The club
-                strives to increase female representation and break down
-                barriers in the Business Technology industry, shaping the future
-                environment for women entering the field. This is accomplished
-                through different events held within the club.
-              </p>
-            </div>
-            <div class="homecard-container">
-              <div class="card-header">
-                <h3 class="results-headers">Our Purpose</h3>
+              <div class="homecard-container">
+                <div class="card-header">
+                  <h3 class="results-headers">Our Purpose</h3>
+                </div>
+                <p>
+                  In creating this information systems database, having a
+                  resource where members can easily access events allows for an
+                  easy retrieval of information from past events which can be
+                  seen in the Event Libarary. Additionally, click the Schedule
+                  tab to see upcoming events.
+                </p>
               </div>
-              <p>
-                In creating this information systems database, having a resource
-                where members can easily access events allows for an easy
-                retrieval of information from past events which can be seen in
-                the Event Libarary. Additionally, click the Schedule tab to see
-                upcoming events.
-              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
     <div class="divider"></div>
+    <br />
+    <br />
     <div style="text-align: center">
       <a href="https://www.instagram.com/wibtuwmadison/"
         ><img src="images/instagram.png" alt="Instagram" width="3.5%"
@@ -87,6 +95,9 @@
           width="3%"
           style="margin-bottom: 2px"
       /></a>
+      <br />
+      <br />
+      <br />
     </div>
 
     <div class="modal" id="modalHome">
