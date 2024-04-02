@@ -9,5 +9,18 @@ r_e("add_enter").addEventListener('click', () =>{
     let event_type = r_e('add_dropdown').value;
     let event_date = r_e('add_date').value;
     let event_description = r_e('add_description').value;
-    console.log(event_name,event_type, event_date, event_description);
+
+    let event = {
+      name: event_name,
+      type: event_type,
+      date: event_date,
+      description: event_description
+    };
+    console.log(event);
+
+    db.collection('event library').add(event)
+    .then(()=>{
+      r_e("addeventform").reset();
+    });
+
   });
