@@ -63,6 +63,40 @@ function r_e(id) {
     content.innerHTML = html;
   });
 
-  function show_events(){
-    db.collection('event library').ge()
+  function show_events(title, date, img, desc){
+    db.collection("event library")
+    .get()
+    .then((data) => {
+      let mydocs = data.docs;
+
+      let html = ``;
+      mydocs.forEach((doc) => {
+        html += `       
+        <div class="schedule-card">
+        <div class="schedule-card-container">
+          <div class="card-header">
+            <h2 class="results-headers">${title}</h2>
+          </div>
+          <br />
+          <h3 class="schedule-date" style="font-style: italic">
+            Event Date: ${date}
+          </h3>
+          <br />
+          <img
+             src=${img}
+            alt=""
+            width="25%"
+            height="40%"
+            style="padding-top: 10px; padding-bottom: 10px"
+          />
+          <p>
+          ${desc}
+          </p>
+        </div>
+      </div>
+        
+        `;
+      });
+      content.innerHTML = html;
+    });
   }
