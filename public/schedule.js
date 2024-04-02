@@ -7,6 +7,8 @@ function r_e(id) {
 
   });
 
+
+
   function print_data(title,date,desc){
     r_e('event_area').innerHTML =         
         `<div class="schedule-card">
@@ -20,6 +22,7 @@ function r_e(id) {
           </h3>
           <br />
           <img
+             src="images/Speaker_Event_icon.png"
             alt=""
             width="25%"
             height="40%"
@@ -59,3 +62,7 @@ function r_e(id) {
     });
     content.innerHTML = html;
   });
+
+  function show_events(){
+    db.collection('event library').ge()
+  }
