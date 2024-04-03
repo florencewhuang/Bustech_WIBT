@@ -1,3 +1,8 @@
+// key functions
+function r_e(id) {
+  return document.querySelector(`#${id}`);
+}
+
 // Load Home Page
 r_e("homepage").addEventListener("click", () => {
   r_e(
@@ -317,91 +322,37 @@ r_e("eventlibpage").addEventListener("click", () => {
         </div>
       </div>
     </div>
-  </div>
-  <!-- Edit Event Modal -->
-  <div class="modal" id="edit-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Edit Event</p>
-        <button aria-label="close" class="delete" id="edit-close-modal"></button>
-      </header>
-      <section class="modal-card-body">
-        <form id="edit-event-form">
-          <div class="field">
-            <label class="label">Event Title</label>
-            <div class="control">
-              <input
-                class="input"
-                type="text"
-                id="edit-event-title"
-                name="edit-event-title"
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Event Type</label>
-            <div class="control">
-              <div class="select">
-                <select id="edit-event-type" name="edit-event-type">
-                  <option value="Speaker">Speaker</option>
-                  <option value="Workshop">Networking</option>
-                  <option value="Seminar">Professional Development</option>
-                  <option value="Seminar">DEI</option>
-                  <option value="Seminar">Fundraiser</option>
-                  <option value="Seminar">Outreach</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Latest Event Date</label>
-            <div class="control">
-              <input
-                class="input"
-                type="date"
-                id="edit-event-date"
-                name="edit-event-date"
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label">Event Description</label>
-            <div class="control">
-              <textarea
-                class="textarea"
-                id="edit-event-description"
-                name="edit-event-description"
-                rows="4"
-                cols="50"
-              ></textarea>
-            </div>
-          </div>
-          <button type="submit" class="button is-primary">
-            Save Changes
-          </button>
-        </form>
-      </section>
-    </div>
-  </div>
-  <!-- Delete Button Modal -->
-  <div class="modal" id="delete-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Delete Event</p>
-        <button aria-label="close" class="delete" id="delete-close-modal"></button>
-      </header>
-      <section class="modal-card-body">
-        <h1>Are you sure you want to delete this event from the Event Library?</h1>
-        <br>
-          <button type="submit" class="button is-danger">
-            Delete
-          </button>
-        </form>
-      </section>
-    </div>
   </div>`;
+
+  // Edit & Delete Buttons in Event Library
+  const editButtons = document.querySelectorAll(".edit-btn");
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+  const editModal = document.getElementById("edit-modal");
+  const deleteModal = document.getElementById("delete-modal");
+  const EditcloseModal = document.getElementById("edit-close-modal");
+  const DeletecloseModal = document.getElementById("delete-close-modal");
+
+  editButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      editModal.classList.add("is-active");
+    });
+  });
+
+  editButtons.forEach((button) => console.log("yay"));
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      deleteModal.classList.add("is-active");
+    });
+  });
+
+  EditcloseModal.addEventListener("click", () => {
+    editModal.classList.remove("is-active");
+  });
+
+  DeletecloseModal.addEventListener("click", () => {
+    deleteModal.classList.remove("is-active");
+  });
 });
 
 // Load Add Events Page
@@ -461,13 +412,7 @@ r_e("addeventspage").addEventListener("click", () => {
   </div>`;
 });
 
-// Login Modal
-function r_e(id) {
-  return document.querySelector(`#${id}`);
-}
-
-//Home Page
-//Login
+//Login Modal
 login = r_e("login");
 
 modalBG = r_e("modalBG");
@@ -486,32 +431,4 @@ login.addEventListener("click", () => {
 
 closeModal.addEventListener("click", () => {
   modalHome.classList.remove("is-active");
-});
-
-// Edit & Delete Buttons in Event Library
-const editButtons = document.querySelectorAll(".edit-btn");
-const deleteButtons = document.querySelectorAll(".delete-btn");
-const editModal = document.getElementById("edit-modal");
-const deleteModal = document.getElementById("delete-modal");
-const EditcloseModal = document.getElementById("edit-close-modal");
-const DeletecloseModal = document.getElementById("delete-close-modal");
-
-editButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    editModal.classList.add("is-active");
-  });
-});
-
-deleteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    deleteModal.classList.add("is-active");
-  });
-});
-
-EditcloseModal.addEventListener("click", () => {
-  editModal.classList.remove("is-active");
-});
-
-DeletecloseModal.addEventListener("click", () => {
-  deleteModal.classList.remove("is-active");
 });

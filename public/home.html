@@ -134,6 +134,93 @@
     </section>
       <div id="passwordcheck"></div>
     </div>
+
+    <!-- Edit Event Modal -->
+  <div class="modal" id="edit-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit Event</p>
+        <button aria-label="close" class="delete" id="edit-close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <form id="edit-event-form">
+          <div class="field">
+            <label class="label">Event Title</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                id="edit-event-title"
+                name="edit-event-title"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Event Type</label>
+            <div class="control">
+              <div class="select">
+                <select id="edit-event-type" name="edit-event-type">
+                  <option value="Speaker">Speaker</option>
+                  <option value="Workshop">Networking</option>
+                  <option value="Seminar">Professional Development</option>
+                  <option value="Seminar">DEI</option>
+                  <option value="Seminar">Fundraiser</option>
+                  <option value="Seminar">Outreach</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Latest Event Date</label>
+            <div class="control">
+              <input
+                class="input"
+                type="date"
+                id="edit-event-date"
+                name="edit-event-date"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Event Description</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                id="edit-event-description"
+                name="edit-event-description"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
+          </div>
+          <button type="submit" class="button is-primary">
+            Save Changes
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+  
+  <!-- Delete Button Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete Event</p>
+        <button aria-label="close" class="delete" id="delete-close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <h1>Are you sure you want to delete this event from the Event Library?</h1>
+        <br>
+          <button type="submit" class="button is-danger">
+            Delete
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+
   </body>
 
   <script src="app.js"></script>
