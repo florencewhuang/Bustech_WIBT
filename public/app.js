@@ -244,11 +244,10 @@ r_e("eventlibpage").addEventListener("click", () => {
       <label class="eventlibsearchheading" for="date">Select date:</label>
       <input class="eventlibinput" type="date" id="date" name="date" />
     </div>
-
-    <div class="submit-btn-container">
-      <input class="eventlib-btn" type="submit" value="Submit" />
-    </div>
   </form>
+  <div class="submit-btn-container">
+  <input class="eventlib-btn" type="submit" value="Submit" />
+</div>
   <br />
   <br />
   <h2 class="results" style="font-weight: bold">Results:</h2>
@@ -387,7 +386,7 @@ r_e("addeventspage").addEventListener("click", () => {
 
     <div class="form-row">
       <div class="addeventform-row">
-        <label class="addeventheading" for="date">Select date:</label>
+        <label class="addeventheading" for="date">Latest Event Date:</label>
         <br />
         <input class="dateinput" type="date" id="add_date" name="date" />
       </div>
@@ -409,7 +408,18 @@ r_e("addeventspage").addEventListener("click", () => {
   <br />
   <div class="submit-container">
     <button class="eventlib-btn" id="add_enter">Enter</button>
-  </div>`;
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>`;
 });
 
 //Login Modal
