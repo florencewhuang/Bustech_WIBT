@@ -1,35 +1,8 @@
-// Login Modal
-function r_e(id) {
-  return document.querySelector(`#${id}`);
-}
-
-//Home Page
-//Login
-login = r_e("login");
-
-modalBG = r_e("modalBG");
-
-modalHome = r_e("modalHome");
-
-modalnewAcct = r_e("modalnewAcct");
-
-create_acct = r_e("create_acct");
-
-const closeModal = document.getElementById("close-modal");
-
-login.addEventListener("click", () => {
-  modalHome.classList.add("is-active");
-});
-
-closeModal.addEventListener("click", () => {
-  modalHome.classList.remove("is-active");
-});
-
 // Load Home Page
 r_e("homepage").addEventListener("click", () => {
   r_e(
     "content_page"
-  ).innerHTML = `<h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+  ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
   <br />
   <br />
   <br />
@@ -69,7 +42,11 @@ r_e("homepage").addEventListener("click", () => {
         </div>
       </div>
     </div>
-  </div>`;
+  </div>
+</div>
+<br />
+<br />
+<br />`;
 });
 
 // Load Schedule Page
@@ -274,41 +251,47 @@ r_e("eventlibpage").addEventListener("click", () => {
     <div class="card-container">
       <div class="results-flex">
         <div class="event-flex">
-          <h3 class="event-title">Event: Coffee & Bagels Social</h3>
-          <h3 class="results-headers">Event Type: Networking</h3>
-          <h3 class="results-headers">Latest Event Date: 02/25/2024</h3>
-          <p>
-            For this event we catered bagels and coffee from Einstein Bros Bagels.
-            We also did a speed networking activity with pre-written questions
-            that you had to ask one another depending on what you and your
-            partner's die landed on.
+          <h3 class="event-title">
+            Event: <span id="event-title">Coffee & Bagels Social</span>
+          </h3>
+          <h3 class="results-headers">
+            Event Type: <span id="event-type-text">Networking</span>
+          </h3>
+          <h3 class="results-headers">
+            Latest Event Date: <span id="event-date-text">02/25/2024</span>
+          </h3>
+          <p id="event-description">
+            For this event we catered bagels and coffee from Einstein Bros
+            Bagels. We also did a speed networking activity with pre-written
+            questions that you had to ask one another depending on what you
+            and your partner's die landed on.
           </p>
         </div>
         <div class="edit-delete-buttons">
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+          <button class="edit-btn" id="edit-button">Edit</button>
+          <button class="delete-btn" id="delete-button">Delete</button>
         </div>
-
       </div>
-      </div>
-      <div class="card-container">
-        <div class="results-flex">
-          <div class="event-flex">
-            <h3 class="event-title">Event: Dragonfly Hot Yoga</h3>
-            <h3 class="results-headers">Event Type: Fundraiser</h3>
-            <h3 class="results-headers">Latest Event Date: 03/01/2024</h3>
-            <p>
-              This fundraiser is a one hour introductory hot yoga class from 7:00 -
-              8:00 PM. Members can attend the event by paying $15 and filing out the sign up form on Flare. Members are also welcome to invite others
-              outside of the club as well but they must also pay the fee and sign up
-              appropriately.
-            </p>
+    </div>
+        <div class="card-container">
+          <div class="results-flex">
+            <div class="event-flex">
+              <h3 class="event-title">Event: Dragonfly Hot Yoga</h3>
+              <h3 class="results-headers">Event Type: Fundraiser</h3>
+              <h3 class="results-headers">Latest Event Date: 03/01/2024</h3>
+              <p>
+                This fundraiser is a one hour introductory hot yoga class from
+                7:00 - 8:00 PM. Members can attend the event by paying $15 and
+                filing out the sign up form on Flare. Members are also welcome
+                to invite others outside of the club as well but they must
+                also pay the fee and sign up appropriately.
+              </p>
+            </div>
+            <div class="edit-delete-buttons">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </div>
           </div>
-          <div class="edit-delete-buttons">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </div>
-        </div>
         </div>
 
         <div class="card-container">
@@ -318,21 +301,105 @@ r_e("eventlibpage").addEventListener("click", () => {
               <h3 class="results-headers">Event Type: Speaker</h3>
               <h3 class="results-headers">Latest Event Date: 02/18/2024</h3>
               <p>
-                This speaker event featured Sadie, a senior here at UW who has had an
-                interesting journey that has lead her into tech sales with Adobe. She
-                will be talking about how various sales concepts apply to our everday
-                lives. Additionally, she will share her story on overcoming obstacles
-                and making difficult career choices that have led her to speak with us
-                today.
+                This speaker event featured Sadie, a senior here at UW who has
+                had an interesting journey that has lead her into tech sales
+                with Adobe. She will be talking about how various sales
+                concepts apply to our everday lives. Additionally, she will
+                share her story on overcoming obstacles and making difficult
+                career choices that have led her to speak with us today.
               </p>
             </div>
             <div class="edit-delete-buttons">
               <button class="edit-btn">Edit</button>
               <button class="delete-btn">Delete</button>
             </div>
-  
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Event Modal -->
+  <div class="modal" id="edit-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit Event</p>
+        <button aria-label="close" class="delete" id="edit-close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <form id="edit-event-form">
+          <div class="field">
+            <label class="label">Event Title</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                id="edit-event-title"
+                name="edit-event-title"
+              />
+            </div>
           </div>
+          <div class="field">
+            <label class="label">Event Type</label>
+            <div class="control">
+              <div class="select">
+                <select id="edit-event-type" name="edit-event-type">
+                  <option value="Speaker">Speaker</option>
+                  <option value="Workshop">Networking</option>
+                  <option value="Seminar">Professional Development</option>
+                  <option value="Seminar">DEI</option>
+                  <option value="Seminar">Fundraiser</option>
+                  <option value="Seminar">Outreach</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Latest Event Date</label>
+            <div class="control">
+              <input
+                class="input"
+                type="date"
+                id="edit-event-date"
+                name="edit-event-date"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Event Description</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                id="edit-event-description"
+                name="edit-event-description"
+                rows="4"
+                cols="50"
+              ></textarea>
+            </div>
+          </div>
+          <button type="submit" class="button is-primary">
+            Save Changes
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+  <!-- Delete Button Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete Event</p>
+        <button aria-label="close" class="delete" id="delete-close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <h1>Are you sure you want to delete this event from the Event Library?</h1>
+        <br>
+          <button type="submit" class="button is-danger">
+            Delete
+          </button>
+        </form>
+      </section>
     </div>
   </div>`;
 });
@@ -392,4 +459,59 @@ r_e("addeventspage").addEventListener("click", () => {
   <div class="submit-container">
     <button class="eventlib-btn" id="add_enter">Enter</button>
   </div>`;
+});
+
+// Login Modal
+function r_e(id) {
+  return document.querySelector(`#${id}`);
+}
+
+//Home Page
+//Login
+login = r_e("login");
+
+modalBG = r_e("modalBG");
+
+modalHome = r_e("modalHome");
+
+modalnewAcct = r_e("modalnewAcct");
+
+create_acct = r_e("create_acct");
+
+const closeModal = document.getElementById("close-modal");
+
+login.addEventListener("click", () => {
+  modalHome.classList.add("is-active");
+});
+
+closeModal.addEventListener("click", () => {
+  modalHome.classList.remove("is-active");
+});
+
+// Edit & Delete Buttons in Event Library
+const editButtons = document.querySelectorAll(".edit-btn");
+const deleteButtons = document.querySelectorAll(".delete-btn");
+const editModal = document.getElementById("edit-modal");
+const deleteModal = document.getElementById("delete-modal");
+const EditcloseModal = document.getElementById("edit-close-modal");
+const DeletecloseModal = document.getElementById("delete-close-modal");
+
+editButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    editModal.classList.add("is-active");
+  });
+});
+
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    deleteModal.classList.add("is-active");
+  });
+});
+
+EditcloseModal.addEventListener("click", () => {
+  editModal.classList.remove("is-active");
+});
+
+DeletecloseModal.addEventListener("click", () => {
+  deleteModal.classList.remove("is-active");
 });
