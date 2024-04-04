@@ -94,7 +94,7 @@ r_e("eventlibpage").addEventListener("click", () => {
     </div>
   </form>
   <div class="submit-btn-container">
-  <input class="eventlib-btn" type="submit" value="Submit" />
+  <input class="eventlib-btn" id="submit_search" type="submit" value="Submit" />
 </div>
   <br />
   <br />
@@ -185,8 +185,6 @@ r_e("eventlibpage").addEventListener("click", () => {
     });
   });
 
-  editButtons.forEach((button) => console.log("yay"));
-
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       deleteModal.classList.add("is-active");
@@ -199,6 +197,22 @@ r_e("eventlibpage").addEventListener("click", () => {
 
   DeletecloseModal.addEventListener("click", () => {
     deleteModal.classList.remove("is-active");
+  });
+
+  // Event Library Event Search Code
+  r_e("submit_search").addEventListener("click", () => {
+    console.log("event search submitted");
+    let keyword_search = r_e("keyword_search").value;
+    let event_type_search = r_e("typesearch_dropdown").value;
+    let date_search = r_e("search_date").value;
+
+    let searched_event = {
+      keyword: keyword_search,
+      type: event_type_search,
+      date: date_search,
+    };
+
+    console.log(searched_event);
   });
 });
 
@@ -268,6 +282,54 @@ r_e("addeventspage").addEventListener("click", () => {
   <br>
   <br>
   <br>`;
+
+  // Add events to the Database
+  function r_e(id) {
+    return document.querySelector(`#${id}`);
+  }
+
+  function img_type(event_type) {
+    if (event_type == "Speaker") {
+      return "images/Speaker_Event_icon.png";
+    }
+    if (event_type == "Networking") {
+      return "images/networking_icon.png";
+    }
+    if (event_type == "PD") {
+      return "images/professional_development_icon.png";
+    }
+    if (event_type == "DEI") {
+      return "images/DEI_icon.png";
+    }
+    if (event_type == "Fundraiser") {
+      return "images/fundraiser_icon.png";
+    }
+    if (event_type == "Outreach") {
+      return "images/community_outreach_icon.jpeg";
+    }
+  }
+
+  r_e("add_enter").addEventListener("click", () => {
+    let event_name = r_e("add_name").value;
+    let event_type = r_e("add_dropdown").value;
+    let event_date = r_e("add_date").value;
+    let event_description = r_e("add_description").value;
+    let image = img_type(event_type);
+
+    let event = {
+      name: event_name,
+      type: event_type,
+      date: event_date,
+      description: event_description,
+      image_id: image,
+    };
+
+    db.collection("event library")
+      .add(event)
+      .then(() => {
+        r_e("addeventform").reset();
+      });
+  });
 });
 
 //Login Modal Functionality
@@ -291,13 +353,17 @@ closeModal.addEventListener("click", () => {
   modalHome.classList.remove("is-active");
 });
 
-// Event Schedule Pulling From the Database
-// r_e("testing").addEventListener("click", () => {
-//   show_events();
-// });
+// Get Todays Date Function
+var today = new Date();
+var day = String(today.getDate()).padStart(2, "0"); // Pad with leading zero if necessary
+var month = String(today.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-based, Pad with leading zero if necessary
+var year = today.getFullYear();
+var todayDate = year + "-" + month + "-" + day;
 
+// Event Schedule Pulling From the Database
 function show_events() {
   db.collection("event library")
+    .where("date", ">=", todayDate)
     .get()
     .then((data) => {
       let mydocs = data.docs;
@@ -326,39 +392,12 @@ function show_events() {
           count = 1;
         }
       }
-      //console.log(mydocs.length);
 
       let html = `<div class="columns">
     <div class="column" id="col1">${html1}</div>
     <div class="column">${html2}</div>
     <div class="column" id="col3">${html3}</div>
     </div>`;
-      // mydocs.forEach((doc) => {
-      //   html += `
-      //   <div class="schedule-card">
-      //   <div class="schedule-card-container">
-      //     <div class="card-header">
-      //       <h2 class="results-headers">${doc.data().name}</h2>
-      //     </div>
-      //     <br />
-      //     <h3 class="schedule-date" style="font-style: italic">
-      //       Event Date:${doc.data().date}
-      //     </h3>
-      //     <br />
-      //     <img
-      //        src= ${doc.data().image_id}
-      //       alt=""
-      //       width="25%"
-      //       height="40%"
-      //       style="padding-top: 10px; padding-bottom: 10px"
-      //     />
-      //     <p>
-      //     ${doc.data().description}
-      //     </p>
-      //   </div>
-      // </div>
-      //   `;
-      // });
 
       r_e("event_area").innerHTML = html;
     });
@@ -368,12 +407,10 @@ function print_event(doc) {
   return `
   <div class="schedule-card">
   <div class="schedule-card-container">
-    <div class="card-header">
-      <h2 class="results-headers">${doc.data().name}</h2>
-    </div>
+    <h2 class="event-title">${doc.data().name}</h2>
     <br />
     <h3 class="schedule-date" style="font-style: italic">
-      Event Date:${doc.data().date}
+      Event Date: ${doc.data().date}
     </h3>
     <br />
     <img
