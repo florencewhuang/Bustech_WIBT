@@ -55,145 +55,9 @@ r_e("schedulepage").addEventListener("click", () => {
   r_e("content_page").innerHTML = `<h1 class="title">UPCOMING EVENTS</h1>
   <br />
   <br />
-  <div id="event_area">
-    <div class="column-layout">
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">IBM Speaker</h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/03/2024
-          </h3>
-          <br />
-          <img
-            src="images/Speaker_Event_icon.png"
-            alt=""
-            width="25%"
-            height="40%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            This event will take place on Zoom at 5pm featuring Kristyn Arends
-            from IBM. Please come prepared with questions to ask her!
-          </p>
-        </div>
-      </div>
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">
-            Spaulding Ridge WE Conference
-          </h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/08/2024
-          </h3>
-          <br />
-          <img
-            src="images/networking_icon.png"
-            alt=""
-            width="30%"
-            height="50%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            There are three sessions in this event from 10:00am-1:00pm. You
-            can attend any of the three sessions. The first session centers
-            around the power of inclusive CEOs, the second session focuses on
-            the diverse journey of women across industries, and the third
-            session talks about supporting women's success in the workplace.
-          </p>
-        </div>
-      </div>
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">Chipotle Fundraiser</h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/11/2024
-          </h3>
-          <br />
-          <img
-            src="images/fundraiser_icon.png"
-            alt=""
-            width="25%"
-            height="40%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            Stop by Chipotle within 5pm-9pm and mention WIBT at the register
-            for a portion of the proceeds from your meal to be donated to
-            WIBT!
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="column-layout">
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">Inclusivity Bingo</h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/10/2024
-          </h3>
-          <br />
-          <img
-            src="images/DEI_icon.png"
-            alt=""
-            width="80%"
-            height="40%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            Join us at Grainger 1110 at 4pm to get to know the diverse
-            backgrounds of your fellow WIBT members. Snacks will be provided!
-          </p>
-        </div>
-      </div>
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">Resume Workshop</h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/15/2024
-          </h3>
-          <br />
-          <img
-            src="images/professional_development_icon.png"
-            alt=""
-            width="30%"
-            height="50%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            The workshop will take place at 7pm in Grainger 2280. Come
-            prepared with 3 hard copies of your resume for feedback from
-            upperclassmen in your career path!
-          </p>
-        </div>
-      </div>
-      <div class="schedule-card">
-        <div class="schedule-card-container">
-          <h2 class="event-title">Letters of Love</h2>
-          <br />
-          <h3 class="schedule-date" style="font-style: italic">
-            Event Date: 03/18/2024
-          </h3>
-          <br />
-          <img
-            src="images/fundraiser_icon.png"
-            alt=""
-            width="25%"
-            height="40%"
-            style="padding-top: 10px; padding-bottom: 10px"
-          />
-          <p>
-            Write letters to children in hospitals to spread love and cheer.
-            All stationary will be provided at Grainger 2210 at 7pm.
-          </p>
-        </div>
-      </div>
-    </div>
+  <div id="event_area"> 
   </div>`;
+  show_events();
 });
 
 // Load Event Lib Page
@@ -426,3 +290,103 @@ login.addEventListener("click", () => {
 closeModal.addEventListener("click", () => {
   modalHome.classList.remove("is-active");
 });
+
+// Event Schedule Pulling From the Database
+// r_e("testing").addEventListener("click", () => {
+//   show_events();
+// });
+
+function show_events() {
+  db.collection("event library")
+    .get()
+    .then((data) => {
+      let mydocs = data.docs;
+
+      let html1 = ``;
+      let html2 = ``;
+      let html3 = ``;
+
+      let doc_num = mydocs.length;
+
+      let count = 1;
+      for (let i = 0; i < mydocs.length; i++) {
+        if (count == 1) {
+          html1 += print_event(mydocs[i]);
+        }
+        if (count == 2) {
+          html2 += print_event(mydocs[i]);
+        }
+        if (count == 3) {
+          html3 += print_event(mydocs[i]);
+        }
+
+        if (count < 3) {
+          count = count + 1;
+        } else {
+          count = 1;
+        }
+      }
+      //console.log(mydocs.length);
+
+      let html = `<div class="columns">
+    <div class="column" id="col1">${html1}</div>
+    <div class="column">${html2}</div>
+    <div class="column" id="col3">${html3}</div>
+    </div>`;
+      // mydocs.forEach((doc) => {
+      //   html += `
+      //   <div class="schedule-card">
+      //   <div class="schedule-card-container">
+      //     <div class="card-header">
+      //       <h2 class="results-headers">${doc.data().name}</h2>
+      //     </div>
+      //     <br />
+      //     <h3 class="schedule-date" style="font-style: italic">
+      //       Event Date:${doc.data().date}
+      //     </h3>
+      //     <br />
+      //     <img
+      //        src= ${doc.data().image_id}
+      //       alt=""
+      //       width="25%"
+      //       height="40%"
+      //       style="padding-top: 10px; padding-bottom: 10px"
+      //     />
+      //     <p>
+      //     ${doc.data().description}
+      //     </p>
+      //   </div>
+      // </div>
+      //   `;
+      // });
+
+      r_e("event_area").innerHTML = html;
+    });
+}
+
+function print_event(doc) {
+  return `
+  <div class="schedule-card">
+  <div class="schedule-card-container">
+    <div class="card-header">
+      <h2 class="results-headers">${doc.data().name}</h2>
+    </div>
+    <br />
+    <h3 class="schedule-date" style="font-style: italic">
+      Event Date:${doc.data().date}
+    </h3>
+    <br />
+    <img
+       src= ${doc.data().image_id}
+      alt=""
+      width="25%"
+      height="40%"
+      style="padding-top: 10px; padding-bottom: 10px"
+    />
+    <p>
+    ${doc.data().description}
+    </p>
+  </div>
+</div>
+  `;
+}
