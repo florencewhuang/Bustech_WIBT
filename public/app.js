@@ -63,9 +63,7 @@ r_e("schedulepage").addEventListener("click", () => {
     <div class="column-layout">
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">IBM Speaker</h2>
-          </div>
+          <h2 class="event-title">IBM Speaker</h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/03/2024
@@ -86,11 +84,9 @@ r_e("schedulepage").addEventListener("click", () => {
       </div>
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">
-              Spaulding Ridge Women Elevate Conference
-            </h2>
-          </div>
+          <h2 class="event-title">
+            Spaulding Ridge WE Conference
+          </h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/08/2024
@@ -114,9 +110,7 @@ r_e("schedulepage").addEventListener("click", () => {
       </div>
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">Chipotle Fundraiser</h2>
-          </div>
+          <h2 class="event-title">Chipotle Fundraiser</h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/11/2024
@@ -140,9 +134,7 @@ r_e("schedulepage").addEventListener("click", () => {
     <div class="column-layout">
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">Inclusivity Bingo</h2>
-          </div>
+          <h2 class="event-title">Inclusivity Bingo</h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/10/2024
@@ -163,9 +155,7 @@ r_e("schedulepage").addEventListener("click", () => {
       </div>
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">Resume Workshop</h2>
-          </div>
+          <h2 class="event-title">Resume Workshop</h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/15/2024
@@ -187,9 +177,7 @@ r_e("schedulepage").addEventListener("click", () => {
       </div>
       <div class="schedule-card">
         <div class="schedule-card-container">
-          <div class="card-header">
-            <h2 class="results-headers">Letters of Love</h2>
-          </div>
+          <h2 class="event-title">Letters of Love</h2>
           <br />
           <h3 class="schedule-date" style="font-style: italic">
             Event Date: 03/18/2024

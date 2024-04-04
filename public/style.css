@@ -157,6 +157,7 @@ body {
 }
 .event-title {
   font-weight: bold;
+  font-size: x-large;
 }
 
 .schedule-card {
@@ -190,6 +191,7 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   color: #84748c;
+  font-size: large;
 }
 
 .form-row {
