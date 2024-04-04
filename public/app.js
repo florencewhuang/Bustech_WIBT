@@ -406,7 +406,7 @@ r_e("addeventspage").addEventListener("click", () => {
   <br>`;
 });
 
-//Login Modal
+//Login Modal Functionality
 login = r_e("login");
 
 modalBG = r_e("modalBG");
