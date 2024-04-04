@@ -21,9 +21,7 @@ r_e("homepage").addEventListener("click", () => {
         <h2 class="results">About Us</h2>
         <div class="eventlib-results">
           <div class="homecard-container">
-            <div class="card-header">
-              <h3 class="results-headers">Our Club</h3>
-            </div>
+            <h3 class="results-headers">Our Club</h3>
             <p>
               WIBT is a club at the University of Wisconsin-Madison. The
               club strives to increase female representation and break down
@@ -33,9 +31,7 @@ r_e("homepage").addEventListener("click", () => {
             </p>
           </div>
           <div class="homecard-container">
-            <div class="card-header">
-              <h3 class="results-headers">Our Purpose</h3>
-            </div>
+            <h3 class="results-headers">Our Purpose</h3>
             <p>
               In creating this information systems database, having a
               resource where members can easily access events allows for an
