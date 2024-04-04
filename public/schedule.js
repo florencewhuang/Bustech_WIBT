@@ -13,6 +13,13 @@ function r_e(id) {
     .then((data) => {
       let mydocs = data.docs;
 
+      let html1 = ``;
+      let html2 = ``;
+      let html3 = ``;
+
+      let doc_num = mydocs.length;
+      
+
       //console.log(mydocs.length);
 
       let html = ``;
@@ -46,3 +53,7 @@ function r_e(id) {
       r_e('event_area').innerHTML = html;
     });
   };
+
+  function print_event(doc){
+
+  }
