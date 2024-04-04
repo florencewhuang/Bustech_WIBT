@@ -333,6 +333,9 @@ r_e("addeventspage").addEventListener("click", () => {
 });
 
 //Login Modal Functionality
+auth.signOut();
+var login_status = 0;
+
 login = r_e("login");
 
 modalBG = r_e("modalBG");
