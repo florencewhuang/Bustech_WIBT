@@ -99,105 +99,9 @@ r_e("eventlibpage").addEventListener("click", () => {
   <br />
   <br />
   <h2 class="results" style="font-weight: bold">Results:</h2>
-  <div class="eventlib-results">
-    <div class="card-container">
-      <div class="results-flex">
-        <div class="event-flex">
-          <h3 class="event-title">
-            Event: <span id="event-title">Coffee & Bagels Social</span>
-          </h3>
-          <h3 class="results-headers">
-            Event Type: <span id="event-type-text">Networking</span>
-          </h3>
-          <h3 class="results-headers">
-            Latest Event Date: <span id="event-date-text">02/25/2024</span>
-          </h3>
-          <p id="event-description">
-            For this event we catered bagels and coffee from Einstein Bros
-            Bagels. We also did a speed networking activity with pre-written
-            questions that you had to ask one another depending on what you
-            and your partner's die landed on.
-          </p>
-        </div>
-        <div class="edit-delete-buttons">
-          <button class="edit-btn" id="edit-button">Edit</button>
-          <button class="delete-btn" id="delete-button">Delete</button>
-        </div>
-      </div>
-    </div>
-        <div class="card-container">
-          <div class="results-flex">
-            <div class="event-flex">
-              <h3 class="event-title">Event: Dragonfly Hot Yoga</h3>
-              <h3 class="results-headers">Event Type: Fundraiser</h3>
-              <h3 class="results-headers">Latest Event Date: 03/01/2024</h3>
-              <p>
-                This fundraiser is a one hour introductory hot yoga class from
-                7:00 - 8:00 PM. Members can attend the event by paying $15 and
-                filing out the sign up form on Flare. Members are also welcome
-                to invite others outside of the club as well but they must
-                also pay the fee and sign up appropriately.
-              </p>
-            </div>
-            <div class="edit-delete-buttons">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-container">
-          <div class="results-flex">
-            <div class="event-flex">
-              <h3 class="event-title">Event: Adobe Event</h3>
-              <h3 class="results-headers">Event Type: Speaker</h3>
-              <h3 class="results-headers">Latest Event Date: 02/18/2024</h3>
-              <p>
-                This speaker event featured Sadie, a senior here at UW who has
-                had an interesting journey that has lead her into tech sales
-                with Adobe. She will be talking about how various sales
-                concepts apply to our everday lives. Additionally, she will
-                share her story on overcoming obstacles and making difficult
-                career choices that have led her to speak with us today.
-              </p>
-            </div>
-            <div class="edit-delete-buttons">
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="eventlib-results" id="event_lib_results">
   </div>`;
-
-  // Edit & Delete Buttons in Event Library
-  const editButtons = document.querySelectorAll(".edit-btn");
-  const deleteButtons = document.querySelectorAll(".delete-btn");
-  const editModal = document.getElementById("edit-modal");
-  const deleteModal = document.getElementById("delete-modal");
-  const EditcloseModal = document.getElementById("edit-close-modal");
-  const DeletecloseModal = document.getElementById("delete-close-modal");
-
-  editButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      editModal.classList.add("is-active");
-    });
-  });
-
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      deleteModal.classList.add("is-active");
-    });
-  });
-
-  EditcloseModal.addEventListener("click", () => {
-    editModal.classList.remove("is-active");
-  });
-
-  DeletecloseModal.addEventListener("click", () => {
-    deleteModal.classList.remove("is-active");
-  });
+  show_event_library();
 
   // Event Library Event Search Code
   r_e("submit_search").addEventListener("click", () => {
@@ -459,4 +363,96 @@ function print_event(doc) {
   </div>
 </div>
   `;
+}
+
+// Event Library Pulling From the Database
+function show_event_library() {
+  db.collection("event library")
+    .get()
+    .then((data) => {
+      let mydocs = data.docs;
+
+      let html_event = ``;
+
+      let doc_num = mydocs.length;
+
+      let count = 1;
+      for (let i = 0; i < mydocs.length; i++) {
+        html_event += print_event_lib(mydocs[i]);
+      }
+      r_e("event_lib_results").innerHTML = html_event;
+      // Edit & Delete Buttons in Event Library
+      const editButtons = document.querySelectorAll(".edit-btn");
+      const deleteButtons = document.querySelectorAll(".delete-btn");
+      const editModal = document.getElementById("edit-modal");
+      const deleteModal = document.getElementById("delete-modal");
+      const EditcloseModal = document.getElementById("edit-close-modal");
+      const DeletecloseModal = document.getElementById("delete-close-modal");
+
+      editButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          editModal.classList.add("is-active");
+        });
+      });
+
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          deleteModal.classList.add("is-active");
+        });
+      });
+
+      EditcloseModal.addEventListener("click", () => {
+        editModal.classList.remove("is-active");
+      });
+
+      DeletecloseModal.addEventListener("click", () => {
+        deleteModal.classList.remove("is-active");
+      });
+    });
+}
+
+function print_event_lib(doc) {
+  if (login_status == 1) {
+    return `<div class="card-container">
+  <div class="results-flex">
+    <div class="event-flex">
+      <h3 class="event-title">
+        Event: <span id="event-title">${doc.data().name}</span>
+      </h3>
+      <h3 class="results-headers">
+        Event Type: <span id="event-type-text">${doc.data().type}</span>
+      </h3>
+      <h3 class="results-headers">
+        Latest Event Date: <span id="event-date-text">${doc.data().date}</span>
+      </h3>
+      <p id="event-description">
+        ${doc.data().description}
+      </p>
+    </div>
+    <div class="edit-delete-buttons">
+      <button class="edit-btn" id="edit-button">Edit</button>
+      <button class="delete-btn" id="delete-button">Delete</button>
+    </div>
+  </div>
+</div>`;
+  } else {
+    return `<div class="card-container">
+  <div class="results-flex">
+    <div class="event-flex">
+      <h3 class="event-title">
+        Event: <span id="event-title">${doc.data().name}</span>
+      </h3>
+      <h3 class="results-headers">
+        Event Type: <span id="event-type-text">${doc.data().type}</span>
+      </h3>
+      <h3 class="results-headers">
+        Latest Event Date: <span id="event-date-text">${doc.data().date}</span>
+      </h3>
+      <p id="event-description">
+        ${doc.data().description}
+      </p>
+    </div>
+  </div>
+</div>`;
+  }
 }
