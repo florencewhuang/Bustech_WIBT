@@ -29,6 +29,10 @@ body {
   padding: 0;
 }
 
+.has-background {
+  background-color: #b3aab7;
+}
+
 .eventlib-btn {
   border: none;
   border-radius: 20px;

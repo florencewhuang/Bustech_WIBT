@@ -17,7 +17,6 @@ r_e("homepage").addEventListener("click", () => {
   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
   <br />
   <br />
-  <br />
   <div>
     <div class="columns">
       <div class="column" id="homeIMG">
@@ -51,10 +50,7 @@ r_e("homepage").addEventListener("click", () => {
       </div>
     </div>
   </div>
-</div>
-<br />
-<br />
-<br />`;
+</div>`;
 });
 
 // Load Schedule Page
@@ -72,6 +68,7 @@ r_e("eventlibpage").addEventListener("click", () => {
   r_e(
     "content_page"
   ).innerHTML = `<h1 class="title">EVENT LIBRARY DATABASE SEARCH</h1>
+  <br />
   <br />
 
   <form id="libform" class="eventlibform">
@@ -496,70 +493,64 @@ r_e("eventlibpage").addEventListener("click", () => {
 
 // Load Add Events Page
 r_e("addeventspage").addEventListener("click", () => {
-  r_e("content_page").innerHTML = `<h1 class="title">EVENT INFORMATION</h1>
-  <br />
+  if (login_status == 1) {
+    r_e("content_page").innerHTML = `<h1 class="title">EVENT INFORMATION</h1>
+    <br />
+    <br />
 
-  <form class="addeventform" id="addeventform">
-    <div class="form-row">
-      <div class="addeventform-row">
-        <label class="addeventheading" for="textbox">Event Title:</label>
-        <input
-          class="addeventinput"
-          type="text"
-          id="add_name"
-          name="textbox"
-        />
+    <form class="addeventform" id="addeventform">
+      <div class="form-row">
+        <div class="addeventform-row">
+          <label class="addeventheading" for="textbox">Event Title:</label>
+          <input
+            class="addeventinput"
+            type="text"
+            id="add_name"
+            name="textbox"
+          />
+        </div>
+
+        <div class="addeventform-row">
+          <label class="addeventheading" for="dropdown">Event Type:</label>
+          <select class="addeventinput" id="add_dropdown" name="dropdown">
+            <option value="Speaker">Speaker</option>
+            <option value="Networking">Networking</option>
+            <option value="PD">Professional Development</option>
+            <option value="DEI">DEI</option>
+            <option value="Fundraiser">Fundraiser</option>
+            <option value="Outreach">Outreach</option>
+          </select>
+        </div>
       </div>
 
-      <div class="addeventform-row">
-        <label class="addeventheading" for="dropdown">Event Type:</label>
-        <select class="addeventinput" id="add_dropdown" name="dropdown">
-          <option value="Speaker">Speaker</option>
-          <option value="Networking">Networking</option>
-          <option value="PD">Professional Development</option>
-          <option value="DEI">DEI</option>
-          <option value="Fundraiser">Fundraiser</option>
-          <option value="Outreach">Outreach</option>
-        </select>
+      <div class="form-row">
+        <div class="addeventform-row">
+          <label class="addeventheading" for="date">Latest Event Date:</label>
+          <br />
+          <input class="dateinput" type="date" id="add_date" name="date" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-row">
-      <div class="addeventform-row">
-        <label class="addeventheading" for="date">Latest Event Date:</label>
-        <br />
-        <input class="dateinput" type="date" id="add_date" name="date" />
+      <div class="form-row">
+        <div class="addeventform-row">
+          <label class="addeventheading" for="textbox"
+            >Event Description:</label
+          >
+          <textarea
+            style="width: 230%; height: 70%"
+            id="add_description"
+            class="addeventinput"
+          ></textarea>
+        </div>
       </div>
-    </div>
-
-    <div class="form-row">
-      <div class="addeventform-row">
-        <label class="addeventheading" for="textbox"
-          >Event Description:</label
-        >
-        <textarea
-          style="width: 230%; height: 70%"
-          id="add_description"
-          class="addeventinput"
-        ></textarea>
-      </div>
-    </div>
-  </form>
-  <br />
-  <div class="submit-container">
-    <button class="eventlib-btn" id="add_enter">Enter</button>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>`;
+    </form>
+    <br />
+    <div class="submit-container">
+      <button class="eventlib-btn" id="add_enter">Enter</button>
+    </div>`;
+  } else {
+    alert("Only Admins have acess to this page please login to continue");
+  }
 
   // Add events to the Database
   function r_e(id) {
@@ -602,11 +593,15 @@ r_e("addeventspage").addEventListener("click", () => {
       image_id: image,
     };
 
-    db.collection("event library")
-      .add(event)
-      .then(() => {
-        r_e("addeventform").reset();
-      });
+    if (event_name == "" || event_date == "" || event_description == "") {
+      alert("All fields must be entered to add an event.");
+    } else {
+      db.collection("event library")
+        .add(event)
+        .then(() => {
+          r_e("addeventform").reset();
+        });
+    }
   });
 });
 
@@ -624,8 +619,8 @@ login.addEventListener("click", () => {
   if (login_status == 1) {
     // User is signed in.
     login.innerHTML = "Login";
-    console.log("In if statement");
     login_status = 0;
+    location.reload();
   } else {
     // No user is signed in.
     r_e("login_form").reset();
@@ -657,6 +652,46 @@ r_e("signUp_btn").addEventListener("click", () => {
 
       //change login button to sign out
       login.innerHTML = "Sign Out";
+
+      r_e(
+        "content_page"
+      ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+      <br />
+      <br />
+      <div>
+        <div class="columns">
+          <div class="column" id="homeIMG">
+            <img src="images/logo.png" alt="WIBT logo" />
+          </div>
+    
+          <div class="column-section column">
+            <h2 class="results">About Us</h2>
+            <div class="eventlib-results">
+              <div class="homecard-container">
+                <h3 class="results-headers">Our Club</h3>
+                <p>
+                  WIBT is a club at the University of Wisconsin-Madison. The
+                  club strives to increase female representation and break down
+                  barriers in the Business Technology industry, shaping the
+                  future environment for women entering the field. This is
+                  accomplished through different events held within the club.
+                </p>
+              </div>
+              <div class="homecard-container">
+                <h3 class="results-headers">Our Purpose</h3>
+                <p>
+                  In creating this information systems database, having a
+                  resource where members can easily access events allows for an
+                  easy retrieval of information from past events which can be
+                  seen in the Event Libarary. Additionally, click the Schedule
+                  tab to see upcoming events.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
     })
     .catch((error) => {
       alert("Incorrect email or password");
