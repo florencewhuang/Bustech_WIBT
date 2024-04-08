@@ -870,12 +870,15 @@ function print_event_lib(doc) {
 function delete_event() {
   r_e("delete-button").addEventListener("click", () => {
     let document_id = document.querySelector(`#${id}`);
-    db.collection("event library").doc(document_id).arrayRemove()..then(() => {
-      console.log("Document deleted");
-    })
-    .catch((error) => {
-      console.error("Error removing: ", error);
-    });;
+    db.collection("event library")
+      .doc(document_id)
+      .arrayRemove()
+      .then(() => {
+        console.log("Document deleted");
+      })
+      .catch((error) => {
+        console.error("Error removing");
+      });
   });
 }
 
