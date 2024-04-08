@@ -867,32 +867,46 @@ function print_event_lib(doc) {
 }
 
 // deleting an event
-function delete_event() {
-  r_e("delete-button").addEventListener("click", () => {
-    let document_id = document.querySelector(`#${id}`);
-    db.collection("event library")
-      .doc(document_id)
-      .arrayRemove()
-      .then(() => {
-        console.log("Document deleted");
-      })
-      .catch((error) => {
-        console.error("Error removing");
-      });
-  });
-}
-
 // function delete_event() {
-//   document.querySelector("#delete-button").addEventListener("click", () => {
-//     const id = "your_document_id"; // replace "your_document_id" with the actual ID of the document you want to delete
+//   r_e("delete-btn").addEventListener("click", () => {
+//     let document_id = document.querySelector(`#${id}`);
 //     db.collection("event library")
-//       .doc(id)
-//       .delete()
+//       .doc(document_id)
+//       .arrayRemove()
 //       .then(() => {
-//         console.log("Document successfully deleted");
+//         console.log("Document deleted");
 //       })
 //       .catch((error) => {
-//         console.error("Error removing document: ", error);
+//         console.error("Error removing");
 //       });
 //   });
 // }
+
+// function delete_event() {
+//   document
+//     .querySelector("#actually_delete_event")
+//     .addEventListener("click", () => {
+//       const id = AWOBecPCRM9dHzCOF4vy; // replace "your_document_id" with the actual ID of the document you want to delete
+//       db.collection("event library")
+//         .doc(id)
+//         .delete()
+//         .then(() => {
+//           console.log("Document successfully deleted");
+//         })
+//         .catch((error) => {
+//           console.error("Error removing document: ", error);
+//         });
+//     });
+// }
+
+function delete_event() {
+  document.getElementById("delete-btn").addEventListener("click", () => {
+    const id = "your_document_id"; // replace "your_document_id" with the actual ID of the document you want to delete
+    db.collection("event library")
+      .doc(id)
+      .delete()
+      .then(() => {
+        alert("Document deleted");
+      });
+  });
+}
