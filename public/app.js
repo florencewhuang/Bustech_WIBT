@@ -865,3 +865,31 @@ function print_event_lib(doc) {
 </div>`;
   }
 }
+
+// deleting an event
+function delete_event() {
+  r_e("delete-button").addEventListener("click", () => {
+    let document_id = document.querySelector(`#${id}`);
+    db.collection("event library").doc(document_id).arrayRemove()..then(() => {
+      console.log("Document deleted");
+    })
+    .catch((error) => {
+      console.error("Error removing: ", error);
+    });;
+  });
+}
+
+// function delete_event() {
+//   document.querySelector("#delete-button").addEventListener("click", () => {
+//     const id = "your_document_id"; // replace "your_document_id" with the actual ID of the document you want to delete
+//     db.collection("event library")
+//       .doc(id)
+//       .delete()
+//       .then(() => {
+//         console.log("Document successfully deleted");
+//       })
+//       .catch((error) => {
+//         console.error("Error removing document: ", error);
+//       });
+//   });
+// }
