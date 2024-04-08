@@ -865,3 +865,59 @@ function print_event_lib(doc) {
 </div>`;
   }
 }
+
+// Loading the Schedule Page after a certain date
+
+r_e("schedulepage").addEventListener("click", () => {
+  r_e("content_page").innerHTML = `<h1 class="title">UPCOMING EVENTS</h1>
+    <br />
+    <br />
+    <div id="event_area">
+    </div>`;
+  db.collection("event library")
+    .where("date", ">=", "2022-09-11")
+    .get()
+    .then((res) => {
+      let mydocs = res.docs;
+
+      let html_event = ``;
+
+      let doc_num = mydocs.length;
+
+      let count = 1;
+      for (let i = 0; i < mydocs.length; i++) {
+        html_event += print_event_lib(mydocs[i]);
+      }
+      r_e("event_lib_results").innerHTML = html_event;
+    });
+});
+
+r_e("schedulepage").addEventListener("click", () => {
+  r_e("content_page").innerHTML = `<h1 class="title">UPCOMING EVENTS</h1>
+    <br />
+    <br />
+    <div id="event_area"> 
+    </div>`;
+  db.collection("event library")
+    .where("date", ">=", "2023-03-26")
+    .get()
+    .then((querySnapshot) => {
+      // Clear previous events
+      const eventArea = r_e("event_area");
+      if (eventArea) {
+        eventArea.innerHTML = "";
+
+        // Loop through query results and display events
+        querySnapshot.forEach((doc) => {
+          const eventData = doc.data();
+          // Display event data as needed
+          // Example: eventArea.innerHTML += `<div>${eventData.name}</div>`;
+        });
+      } else {
+        console.error("Event area element not found.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting events: ", error);
+    });
+});
