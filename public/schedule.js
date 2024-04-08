@@ -81,12 +81,12 @@ function r_e(id) {
     return(`
     <div class="schedule-card">
     <div class="schedule-card-container">
-      <div class="card-header">
+    <div class="has-text-centered">
         <h2 class="results-headers">${doc.data().name}</h2>
       </div>
       <br />
       <h3 class="schedule-date" style="font-style: italic">
-        Event Date:${doc.data().date}
+        Event Date: ${doc.data().date}
       </h3>
       <br />
       <img
