@@ -804,11 +804,22 @@ function show_event_library() {
         });
       });
 
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          deleteModal.classList.add("is-active");
-        });
-      });
+      // deleteButtons.forEach((button) => {
+      //   button.addEventListener("click", () => {
+      //     deleteModal.classList.add("is-active");
+      //   });
+      // function delete_event() {
+      //   r_e("actually_delete_event").addEventListener("click", () => {
+      //     db.collection("event library")
+      //       .doc(document_id)
+      //       .delete()
+      //       .then(() => {
+      //         alert("Document deleted");
+      //       });
+      //   });
+      // }
+
+      function open_delmodel(id) {}
 
       EditcloseModal.addEventListener("click", () => {
         editModal.classList.remove("is-active");
@@ -840,7 +851,9 @@ function print_event_lib(doc) {
     </div>
     <div class="edit-delete-buttons">
       <button class="edit-btn" id="edit-button">Edit</button>
-      <button class="delete-btn" id="delete-button">Delete</button>
+      <button onclick = "open-delmodel('${
+        doc.id
+      }')" class="delete-btn" id="delete-button">Delete</button>
     </div>
   </div>
 </div>`;
@@ -866,47 +879,13 @@ function print_event_lib(doc) {
   }
 }
 
+// updating an event
+
 // deleting an event
-// function delete_event() {
-//   r_e("delete-btn").addEventListener("click", () => {
-//     let document_id = document.querySelector(`#${id}`);
-//     db.collection("event library")
-//       .doc(document_id)
-//       .arrayRemove()
-//       .then(() => {
-//         console.log("Document deleted");
-//       })
-//       .catch((error) => {
-//         console.error("Error removing");
-//       });
-//   });
-// }
 
-// function delete_event() {
-//   document
-//     .querySelector("#actually_delete_event")
-//     .addEventListener("click", () => {
-//       const id = AWOBecPCRM9dHzCOF4vy; // replace "your_document_id" with the actual ID of the document you want to delete
-//       db.collection("event library")
-//         .doc(id)
-//         .delete()
-//         .then(() => {
-//           console.log("Document successfully deleted");
-//         })
-//         .catch((error) => {
-//           console.error("Error removing document: ", error);
-//         });
-//     });
+// function del_doc(id) {
+//   db.collection("people")
+//     .doc(id)
+//     .delete()
+//     .then(() => alert("user deleted"));
 // }
-
-function delete_event() {
-  document.getElementById("delete-btn").addEventListener("click", () => {
-    const id = "your_document_id"; // replace "your_document_id" with the actual ID of the document you want to delete
-    db.collection("event library")
-      .doc(id)
-      .delete()
-      .then(() => {
-        alert("Document deleted");
-      });
-  });
-}
