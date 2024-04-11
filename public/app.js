@@ -3,11 +3,12 @@ function r_e(id) {
   return document.querySelector(`#${id}`);
 }
 
-function capFL(str) {
-  if (str.length === 0) {
-    return "";
-  }
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function check_key(word, paragraph) {
+  word = word.toLowerCase();
+  paragraph = paragraph.toLowerCase();
+
+  var wordsArray = paragraph.split(" ");
+  return wordsArray.includes(word);
 }
 
 // Load Home Page
@@ -74,7 +75,7 @@ r_e("eventlibpage").addEventListener("click", () => {
   <form id="libform" class="eventlibform">
     <div class="eventlibform-row">
       <label class="eventlibsearchheading" for="textbox"
-        >Event Name Starts With:</label
+        >Event Keyword Search:</label
       >
       <input class="eventlibinput" type="text" id="keyword_search" name="textbox" />
     </div>
@@ -107,7 +108,6 @@ r_e("eventlibpage").addEventListener("click", () => {
   </div>`;
   show_event_library();
 
-  // Event Library Event Search Code
   r_e("submit_search").addEventListener("click", () => {
     let keyword_search = r_e("keyword_search").value;
     let event_type_search = r_e("typesearch_dropdown").value;
@@ -273,20 +273,18 @@ r_e("eventlibpage").addEventListener("click", () => {
       date_search == ""
     ) {
       db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
         .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
+        .then(function (querySnapshot) {
           let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
+          querySnapshot.forEach(function (doc) {
+            var desc = doc.data().description;
+            var evtname = doc.data().name;
+            var wordExists = check_key(keyword_search, desc);
+            var wordExists2 = check_key(keyword_search, evtname);
+            if (wordExists || wordExists2) {
+              html_event += print_event_lib(doc);
+            }
+          });
           r_e("event_lib_results").innerHTML = html_event;
           // Edit & Delete Buttons in Event Library
           const editButtons = document.querySelectorAll(".edit-btn");
@@ -325,21 +323,19 @@ r_e("eventlibpage").addEventListener("click", () => {
       date_search == ""
     ) {
       db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
         .where("type", "==", event_type_search)
         .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
+        .then(function (querySnapshot) {
           let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
+          querySnapshot.forEach(function (doc) {
+            var desc = doc.data().description;
+            var evtname = doc.data().name;
+            var wordExists = check_key(keyword_search, desc);
+            var wordExists2 = check_key(keyword_search, evtname);
+            if (wordExists || wordExists2) {
+              html_event += print_event_lib(doc);
+            }
+          });
           r_e("event_lib_results").innerHTML = html_event;
           // Edit & Delete Buttons in Event Library
           const editButtons = document.querySelectorAll(".edit-btn");
@@ -379,21 +375,19 @@ r_e("eventlibpage").addEventListener("click", () => {
       date_search != ""
     ) {
       db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
         .where("date", "==", date_search)
         .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
+        .then(function (querySnapshot) {
           let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
+          querySnapshot.forEach(function (doc) {
+            var desc = doc.data().description;
+            var evtname = doc.data().name;
+            var wordExists = check_key(keyword_search, desc);
+            var wordExists2 = check_key(keyword_search, evtname);
+            if (wordExists || wordExists2) {
+              html_event += print_event_lib(doc);
+            }
+          });
           r_e("event_lib_results").innerHTML = html_event;
           // Edit & Delete Buttons in Event Library
           const editButtons = document.querySelectorAll(".edit-btn");
@@ -433,22 +427,20 @@ r_e("eventlibpage").addEventListener("click", () => {
       date_search != ""
     ) {
       db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
         .where("date", "==", date_search)
         .where("type", "==", event_type_search)
         .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
+        .then(function (querySnapshot) {
           let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
+          querySnapshot.forEach(function (doc) {
+            var desc = doc.data().description;
+            var evtname = doc.data().name;
+            var wordExists = check_key(keyword_search, desc);
+            var wordExists2 = check_key(keyword_search, evtname);
+            if (wordExists || wordExists2) {
+              html_event += print_event_lib(doc);
+            }
+          });
           r_e("event_lib_results").innerHTML = html_event;
           // Edit & Delete Buttons in Event Library
           const editButtons = document.querySelectorAll(".edit-btn");
@@ -548,61 +540,68 @@ r_e("addeventspage").addEventListener("click", () => {
     <div class="submit-container">
       <button class="eventlib-btn" id="add_enter">Enter</button>
     </div>`;
-  } else {
-    alert("Only Admins have acess to this page please login to continue");
-  }
+    // Add events to the Database
+    function img_type(event_type) {
+      if (event_type == "Speaker") {
+        return "images/Speaker_Event_icon.png";
+      }
+      if (event_type == "Networking") {
+        return "images/networking_icon.png";
+      }
+      if (event_type == "PD") {
+        return "images/professional_development_icon.png";
+      }
+      if (event_type == "DEI") {
+        return "images/DEI_icon.png";
+      }
+      if (event_type == "Fundraiser") {
+        return "images/fundraiser_icon.png";
+      }
+      if (event_type == "Outreach") {
+        return "images/community_outreach_icon.jpeg";
+      }
+    }
 
-  // Add events to the Database
-  function r_e(id) {
-    return document.querySelector(`#${id}`);
-  }
+    r_e("add_enter").addEventListener("click", () => {
+      let event_name = r_e("add_name").value;
+      let event_type = r_e("add_dropdown").value;
+      let event_date = r_e("add_date").value;
+      let event_description = r_e("add_description").value;
+      let image = img_type(event_type);
 
-  function img_type(event_type) {
-    if (event_type == "Speaker") {
-      return "images/Speaker_Event_icon.png";
-    }
-    if (event_type == "Networking") {
-      return "images/networking_icon.png";
-    }
-    if (event_type == "PD") {
-      return "images/professional_development_icon.png";
-    }
-    if (event_type == "DEI") {
-      return "images/DEI_icon.png";
-    }
-    if (event_type == "Fundraiser") {
-      return "images/fundraiser_icon.png";
-    }
-    if (event_type == "Outreach") {
-      return "images/community_outreach_icon.jpeg";
-    }
-  }
+      let event = {
+        name: event_name,
+        type: event_type,
+        date: event_date,
+        description: event_description,
+        image_id: image,
+      };
 
-  r_e("add_enter").addEventListener("click", () => {
-    let event_name = r_e("add_name").value;
-    let event_type = r_e("add_dropdown").value;
-    let event_date = r_e("add_date").value;
-    let event_description = r_e("add_description").value;
-    let image = img_type(event_type);
-
-    let event = {
-      name: event_name,
-      type: event_type,
-      date: event_date,
-      description: event_description,
-      image_id: image,
-    };
-
-    if (event_name == "" || event_date == "" || event_description == "") {
-      alert("All fields must be entered to add an event.");
-    } else {
-      db.collection("event library")
-        .add(event)
-        .then(() => {
-          r_e("addeventform").reset();
+      if (event_name == "" || event_date == "" || event_description == "") {
+        r_e(
+          "alertmodal"
+        ).innerHTML = `All fields must be entered to add an event to the event library.`;
+        modalAlert.classList.add("is-active");
+        AlertCloseModal.addEventListener("click", () => {
+          modalAlert.classList.remove("is-active");
         });
-    }
-  });
+      } else {
+        db.collection("event library")
+          .add(event)
+          .then(() => {
+            r_e("addeventform").reset();
+          });
+      }
+    });
+  } else {
+    r_e(
+      "alertmodal"
+    ).innerHTML = `Only admins have access to the add events page. Please login to continue.`;
+    modalAlert.classList.add("is-active");
+    AlertCloseModal.addEventListener("click", () => {
+      modalAlert.classList.remove("is-active");
+    });
+  }
 });
 
 //Login Modal Functionality
@@ -694,7 +693,13 @@ r_e("signUp_btn").addEventListener("click", () => {
     </div>`;
     })
     .catch((error) => {
-      alert("Incorrect email or password");
+      r_e(
+        "alertmodal"
+      ).innerHTML = `Incorrect email or password login please try again.`;
+      modalAlert.classList.add("is-active");
+      AlertCloseModal.addEventListener("click", () => {
+        modalAlert.classList.remove("is-active");
+      });
       r_e("login_form").reset();
     });
 });
