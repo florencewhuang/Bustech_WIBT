@@ -112,381 +112,63 @@ r_e("eventlibpage").addEventListener("click", () => {
     let keyword_search = r_e("keyword_search").value;
     let event_type_search = r_e("typesearch_dropdown").value;
     let date_search = r_e("search_date").value;
-    // If user inputs a date and event type filter
-    if (
-      keyword_search == "" &&
-      event_type_search != "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("type", "==", event_type_search)
-        .where("date", "==", date_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
 
-          let html_event = ``;
+    getdocs(keyword_search);
 
-          let doc_num = mydocs.length;
+    let html = ``;
 
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
+
+    // Function to check if word exists in paragraph
+function check_key(word, paragraph) {
+  // Convert both to lower case for case-insensitive comparison
+  word = word.toLowerCase();
+  paragraph = paragraph.toLowerCase();
+  
+  // Split paragraph into array of words
+  var wordsArray = paragraph.split(" ");
+  
+  // Check if the word exists in the array
+  return wordsArray.includes(word);
+}
+
+function print_results(html){
+  console.log("in function")
+  r_e('event_lib_results').innerHTML = html;
+}
+
+// Function to retrieve all documents from a collection
+function getdocs(keyword_search) {
+  let html = ``;
+  // Use Firebase SDK to fetch all documents from a collection
+  db.collection("event library").get()
+  .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          // For each document, check the paragraph
+          var desc = doc.data().description;
+          
+          // Check if word exists in paragraph
+          var wordExists = check_key(keyword_search, desc);
+          
+          // Do something with the result
+          if (wordExists) {
+
+            html += `<p>${doc.data().name}</p>`
+
+              console.log("Word exists in paragraph in document: ", doc.id);
+          } else {
+              //console.log("Word does not exist in paragraph in document: ", doc.id);
           }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
+      });
+      print_results(html);
+  })
+  .catch(function(error) {
+      console.log("Error getting documents:", error);
+  });
 
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
+};
 
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
+event_lib_results.innerHTML = html;
 
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    // if user inputs just a date filter
-    if (
-      keyword_search == "" &&
-      event_type_search == "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("date", "==", date_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    // if a user inputs just an event type
-    if (
-      keyword_search == "" &&
-      event_type_search != "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .where("type", "==", event_type_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    // user just filters using keyword search
-    if (
-      keyword_search != "" &&
-      event_type_search == "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    // if user inputs a keyword search and an event type
-    if (
-      keyword_search != "" &&
-      event_type_search != "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
-        .where("type", "==", event_type_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-
-    // if a user inputs a keyword search and date
-    if (
-      keyword_search != "" &&
-      event_type_search == "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
-        .where("date", "==", date_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-
-    // if a user inputs a keyword search and date and event type
-    if (
-      keyword_search != "" &&
-      event_type_search != "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("name", ">=", capFL(keyword_search))
-        .where("name", "<=", capFL(keyword_search) + "z")
-        .where("date", "==", date_search)
-        .where("type", "==", event_type_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
-
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    if (
-      keyword_search == "" &&
-      event_type_search == "Any" &&
-      date_search == ""
-    ) {
-      show_event_library();
-    }
     r_e("libform").reset();
   });
 });
