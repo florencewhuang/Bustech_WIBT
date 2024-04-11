@@ -117,17 +117,11 @@ r_e("eventlibpage").addEventListener("click", () => {
 
     let html = ``;
 
-
-    // Function to check if word exists in paragraph
 function check_key(word, paragraph) {
-  // Convert both to lower case for case-insensitive comparison
   word = word.toLowerCase();
   paragraph = paragraph.toLowerCase();
   
-  // Split paragraph into array of words
   var wordsArray = paragraph.split(" ");
-  
-  // Check if the word exists in the array
   return wordsArray.includes(word);
 }
 
@@ -136,28 +130,42 @@ function print_results(html){
   r_e('event_lib_results').innerHTML = html;
 }
 
-// Function to retrieve all documents from a collection
+
 function getdocs(keyword_search) {
   let html = ``;
-  // Use Firebase SDK to fetch all documents from a collection
+
   db.collection("event library").get()
   .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-          // For each document, check the paragraph
+
           var desc = doc.data().description;
-          
-          // Check if word exists in paragraph
+
           var wordExists = check_key(keyword_search, desc);
-          
-          // Do something with the result
           if (wordExists) {
 
-            html += `<p>${doc.data().name}</p>`
-
-              console.log("Word exists in paragraph in document: ", doc.id);
-          } else {
-              //console.log("Word does not exist in paragraph in document: ", doc.id);
-          }
+            html += `<div class="card-container">
+            <div class="results-flex">
+              <div class="event-flex">
+                <h3 class="event-title">
+                  Event: <span id="event-title">${doc.data().name}</span>
+                </h3>
+                <h3 class="results-headers">
+                  Event Type: <span id="event-type-text">${doc.data().type}</span>
+                </h3>
+                <h3 class="results-headers">
+                  Latest Event Date: <span id="event-date-text">${doc.data().date}</span>
+                </h3>
+                <p id="event-description">
+                  ${doc.data().description}
+                </p>
+              </div>
+              <div class="edit-delete-buttons">
+                <button class="edit-btn" id="edit-button">Edit</button>
+                <button class="delete-btn" id="delete-button">Delete</button>
+              </div>
+            </div>
+          </div>`;
+          };
       });
       print_results(html);
   })
