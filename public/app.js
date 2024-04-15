@@ -12,9 +12,9 @@ function check_key(word, paragraph) {
 }
 
 function del_doc(id) {
-
   setTimeout(function() {
     console.log('Delayed click executed!');
+    r_e("delete-modal").classList.add("is-active");
     // Add your code here to execute after the delay
 }, 1000);
 
