@@ -12,7 +12,27 @@ function check_key(word, paragraph) {
 }
 
 function del_doc(id) {
-  alert("button clicked");
+
+  setTimeout(function() {
+    console.log('Delayed click executed!');
+    // Add your code here to execute after the delay
+}, 1000);
+
+r_e('confirm-delete').addEventListener('click', () => {
+  console.log('final delete clicked');
+  console.log(id)
+  db.collection("event library")
+      .doc(id)
+      .delete()
+  r_e("delete-modal").classList.remove("is-active");
+});
+
+
+
+  
+  // console.log(id);
+  // setTimeout(console.log(r_e("delete-modal").classList.contains('is-active')),10000);
+  //console.log(r_e("delete-modal").classList.contains('is-active'))
   // r_e("delete-modal").classList.add("is-active");
   // r_e("confirm-delete").addEventListener("click", () => {
   //   db.collection("event library")
@@ -74,6 +94,49 @@ r_e("schedulepage").addEventListener("click", () => {
   </div>`;
   show_events();
 });
+
+function event_page(){
+  r_e(
+    "content_page"
+  ).innerHTML = `<h1 class="title">EVENT LIBRARY DATABASE SEARCH</h1>
+  <br />
+  <br />
+
+  <form id="libform" class="eventlibform">
+    <div class="eventlibform-row">
+      <label class="eventlibsearchheading" for="textbox"
+        >Event Keyword Search:</label
+      >
+      <input class="eventlibinput" type="text" id="keyword_search" name="textbox" />
+    </div>
+
+    <div class="eventlibform-row">
+      <label class="eventlibsearchheading" for="dropdown">Event Type:</label>
+      <select class="eventlibinput" id="typesearch_dropdown" name="dropdown">
+        <option value="Any">Any</option>
+        <option value="Speaker">Speaker</option>
+        <option value="Networking">Networking</option>
+        <option value="PD">Professional Development</option>
+        <option value="DEI">DEI</option>
+        <option value="Fundraiser">Fundraiser</option>
+        <option value="Outreach">Outreach</option>
+      </select>
+    </div>
+
+    <div class="eventlibform-row">
+      <label class="eventlibsearchheading" for="date">Select date:</label>
+      <input class="eventlibinput" type="date" id="search_date" name="date" />
+    </div>
+  </form>
+  <div class="submit-btn-container">
+  <input class="eventlib-btn" id="submit_search" type="submit" value="Submit" />
+</div>
+  <br />
+  <br />
+  <h2 class="results" style="font-weight: bold">Results:</h2>
+  <div class="eventlib-results" id="event_lib_results">
+  </div>`;
+}
 
 // Load Event Lib Page
 r_e("eventlibpage").addEventListener("click", () => {
@@ -159,6 +222,9 @@ r_e("eventlibpage").addEventListener("click", () => {
               editModal.classList.add("is-active");
             });
           });
+
+
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
           deleteButtons.forEach((button) => {
             button.addEventListener("click", () => {
