@@ -11,6 +11,17 @@ function check_key(word, paragraph) {
   return wordsArray.includes(word);
 }
 
+function del_doc(id) {
+  alert("button clicked");
+  // r_e("delete-modal").classList.add("is-active");
+  // r_e("confirm-delete").addEventListener("click", () => {
+  //   db.collection("event library")
+  //     .doc(id)
+  //     .delete()
+  //     .then(() => alert("user deleted"));
+  // });
+}
+
 // Load Home Page
 r_e("homepage").addEventListener("click", () => {
   r_e(
@@ -797,7 +808,7 @@ function show_event_library() {
       r_e("event_lib_results").innerHTML = html_event;
       // Edit & Delete Buttons in Event Library
       const editButtons = document.querySelectorAll(".edit-btn");
-      const deleteButtons = document.querySelectorAll(".delete-btn");
+      // const deleteButtons = document.querySelectorAll(".delete-btn");
       const editModal = document.getElementById("edit-modal");
       const deleteModal = document.getElementById("delete-modal");
       const EditcloseModal = document.getElementById("edit-close-modal");
@@ -809,11 +820,11 @@ function show_event_library() {
         });
       });
 
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          deleteModal.classList.add("is-active");
-        });
-      });
+      // deleteButtons.forEach((button) => {
+      //   button.addEventListener("click", () => {
+      //     deleteModal.classList.add("is-active");
+      //   });
+      // });
 
       EditcloseModal.addEventListener("click", () => {
         editModal.classList.remove("is-active");
@@ -845,7 +856,9 @@ function print_event_lib(doc) {
     </div>
     <div class="edit-delete-buttons">
       <button class="edit-btn" id="edit-button">Edit</button>
-      <button class="delete-btn" id="delete-button">Delete</button>
+      <button onclick="del_doc('${
+        doc.id
+      }')" class="delete-btn" id="delete-button">Delete</button>
     </div>
   </div>
 </div>`;
