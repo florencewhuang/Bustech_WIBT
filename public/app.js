@@ -568,7 +568,14 @@ r_e("addeventspage").addEventListener("click", () => {
       return "images/professional_development_icon.png";
     }
     if (event_type == "DEI") {
-      return "images/DEI_icon.png";
+      return (
+        <img
+          src="images/DEI_icon.png"
+          alt="Girl in a jacket"
+          width="5000"
+          height="5000"
+        ></img>
+      );
     }
     if (event_type == "Fundraiser") {
       return "images/fundraiser_icon.png";
