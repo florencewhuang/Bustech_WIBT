@@ -774,7 +774,7 @@ function print_event(doc) {
   `;
 }
 
-// update existing event in event library 
+// update existing event in event library
 
 function save_doc(ele, id) {
   let inputs = ele.parentNode.querySelectorAll("input");
@@ -794,6 +794,7 @@ function update_doc(ele, id) {
   ele.parentNode.querySelectorAll("input").forEach((e) => {
     e.type = "text";
   });
+}
 
 // Event Library Pulling From the Database
 function show_event_library() {
