@@ -779,11 +779,14 @@ function print_event(doc) {
 function save_doc(ele, id) {
   let inputs = ele.parentNode.querySelectorAll("input");
 
-  db.collection("people")
+  db.collection("event library")
     .doc(id)
     .update({
-      name: inputs[0].value,
-      city: inputs[1].value,
+      title: inputs[0].value,
+      type: inputs[1].value,
+      date: inputs[2].value,
+      description: inputs[3].value,
+
     })
     .then(() => alert("info updated"));
 }
