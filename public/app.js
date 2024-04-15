@@ -107,12 +107,16 @@ r_e("eventlibpage").addEventListener("click", () => {
   </div>`;
   show_event_library();
 
+
   // Event Library Event Search Code
   r_e("submit_search").addEventListener("click", () => {
     let keyword_search = r_e("keyword_search").value;
     let event_type_search = r_e("typesearch_dropdown").value;
     let date_search = r_e("search_date").value;
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
     getdocs(keyword_search);
 
     let html = ``;
@@ -143,7 +147,7 @@ function getdocs(keyword_search) {
           var wordExists = check_key(keyword_search, desc);
           if (wordExists) {
 
-            html += `<div class="card-container">
+            html += `<div class="card-container" id = "${doc.id}">
             <div class="results-flex">
               <div class="event-flex">
                 <h3 class="event-title">
@@ -159,10 +163,6 @@ function getdocs(keyword_search) {
                   ${doc.data().description}
                 </p>
               </div>
-              <div class="edit-delete-buttons">
-                <button class="edit-btn" id="edit-button">Edit</button>
-                <button class="delete-btn" id="delete-button">Delete</button>
-              </div>
             </div>
           </div>`;
           };
@@ -175,11 +175,12 @@ function getdocs(keyword_search) {
 
 };
 
-event_lib_results.innerHTML = html;
-
     r_e("libform").reset();
   });
 });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Load Add Events Page
 r_e("addeventspage").addEventListener("click", () => {
