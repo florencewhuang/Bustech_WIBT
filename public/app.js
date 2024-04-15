@@ -568,7 +568,7 @@ r_e("addeventspage").addEventListener("click", () => {
       return "images/professional_development_icon.png";
     }
     if (event_type == "DEI") {
-      return "images/DEI.png";
+      return "images/DEI_image.png";
     }
     if (event_type == "Fundraiser") {
       return "images/fundraiser_icon.png";
