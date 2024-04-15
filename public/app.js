@@ -574,7 +574,7 @@ r_e("addeventspage").addEventListener("click", () => {
       return "images/fundraiser_icon.png";
     }
     if (event_type == "Outreach") {
-      return "images/community_outreach_icon.jpeg";
+      return "images/community_outreach_icon.png";
     }
   }
 
@@ -786,7 +786,6 @@ function save_doc(ele, id) {
       type: inputs[1].value,
       date: inputs[2].value,
       description: inputs[3].value,
-
     })
     .then(() => alert("info updated"));
 }
