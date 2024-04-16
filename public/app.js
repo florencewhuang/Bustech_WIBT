@@ -229,7 +229,7 @@ r_e("addeventspage").addEventListener("click", () => {
           <input class="dateinput" type="date" id="add_date" name="date" />
         </div>
       </div>
-
+      
       <div class="form-row">
         <div class="addeventform-row">
           <label class="addeventheading" for="textbox"
