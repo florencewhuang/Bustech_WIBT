@@ -130,6 +130,25 @@
     <div id="passwordcheck"></div>
   </div>
 
+  <!-- Delete Button Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete Event</p>
+        <button aria-label="close" class="delete" id="delete-close-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <h1>Are you sure you want to delete this event from the Event Library?</h1>
+        <br>
+          <button id="confirm-delete" type="submit" class="button is-danger">
+            Delete
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+
   <!-- Edit Event Modal -->
   <div class="modal" id="edit-modal">
     <div class="modal-background"></div>
@@ -152,11 +171,11 @@
               <div class="select">
                 <select id="edit-event-type" name="edit-event-type">
                   <option value="Speaker">Speaker</option>
-                  <option value="Workshop">Networking</option>
-                  <option value="Seminar">Professional Development</option>
-                  <option value="Seminar">DEI</option>
-                  <option value="Seminar">Fundraiser</option>
-                  <option value="Seminar">Outreach</option>
+                  <option value="Networking">Networking</option>
+                  <option value="PD">Professional Development</option>
+                  <option value="DEI">DEI</option>
+                  <option value="Fundraiser">Fundraiser</option>
+                  <option value="Outreach">Outreach</option>
                 </select>
               </div>
             </div>
@@ -174,45 +193,25 @@
                 cols="50"></textarea>
             </div>
           </div>
-          <button type="submit" class="button is-primary">
+          <button type="submit" class="button is-primary" id="save_chgs">
             Save Changes
           </button>
         </form>
       </section>
     </div>
   </div>
-  
-  <!-- Alert Modal -->
-  <div class="modal" id="modalAlert">
-    <div class="modal-background" id="modalBG"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Error</p>
-        <button class="delete" aria-label="close" id="AlertCloseModal"></button>
-      </header>
-      <section class="modal-card-body">
-        <p class="has-text-danger" id="alertmodal"></p>
-      </section>
-  </div>
 
-  <!-- Delete Button Modal -->
-  <div class="modal" id="delete-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Delete Event</p>
-        <button aria-label="close" class="delete" id="delete-close-modal"></button>
-      </header>
-      <section class="modal-card-body">
-        <h1>Are you sure you want to delete this event from the Event Library?</h1>
-        <br>
-          <button id="confirm-delete" type="submit" class="button is-danger">
-            Delete
-          </button>
-        </form>
-      </section>
+    <!-- Alert Modal -->
+    <div class="modal" id="modalAlert">
+      <div class="modal-background" id="modalBG"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p id="alerttitle" class="modal-card-title"></p>
+          <button class="delete" aria-label="close" id="AlertCloseModal"></button>
+        </header>
+        <section id="alertbody" class="modal-card-body">
+        </section>
     </div>
-  </div>
 
 </body>
 <!-- link to JS -->
