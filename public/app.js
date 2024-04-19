@@ -229,19 +229,19 @@ r_e("addeventspage").addEventListener("click", () => {
           <input class="dateinput" type="date" id="add_date" name="date" />
         </div>
       </div>
-      
       <div class="form-row">
         <div class="addeventform-row">
-          <label class="addeventheading" for="textbox"
-            >Event Description:</label
-          >
+          <div>
+            <label class="addeventheading" for="textarea">Event Description:</label>
+          </div>
           <textarea
-            style="width: 230%; height: 70%"
+            style="width: 800px; height: 90px"
             id="add_description"
-            class="addeventinput"
+            class="addtextareainput"
           ></textarea>
         </div>
       </div>
+      
     </form>
     <br />
     <div class="submit-container">

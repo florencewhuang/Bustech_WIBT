@@ -20,6 +20,7 @@
 
 .navlinks:hover {
   background-color: rgb(90, 50, 90);
+  color: white;
 }
 
 body {
@@ -271,6 +272,13 @@ body {
   font-size: large;
   font-family: Georgia, "Times New Roman", Times, serif;
   width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.addtextareainput {
+  font-size: large;
+  font-family: Georgia, "Times New Roman", Times, serif;
   box-sizing: border-box;
   border-radius: 10px;
 }
