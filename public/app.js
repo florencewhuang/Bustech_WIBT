@@ -187,6 +187,11 @@ function event_page() {
 
 // Load Event Lib Page
 r_e("eventlibpage").addEventListener("click", () => {
+  const loginButton = document.getElementById("login");
+  // loginButton.classList.add("active");
+  if (loginButton) {
+    loginButton.classList.add("active");
+  }
   load_eventlib();
 });
 
@@ -486,7 +491,6 @@ function print_event(doc) {
 }
 
 // Loading the event library page function
-
 function load_eventlib() {
   r_e(
     "content_page"
