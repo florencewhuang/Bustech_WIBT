@@ -183,6 +183,7 @@ function getdocs(keyword_search) {
 
   //if click on load more 
   r_e("load_more_btn").addEventListener("click", () => {
+    console.log(load_count)
     pagination_load(r_e("event_lib_results").innerHTML)
   });
 });
@@ -690,8 +691,19 @@ function pagination_load(html_event){
       html_event += print_event_lib(doc);
     })
     r_e("event_lib_results").innerHTML = html_event;
-    load_count++;
+    check_load();
   };
+
+  function check_load(){
+    if(load_count>=0 & load_count<doc_arr.length-1){
+      load_count++;
+    }
+    else{
+      r_e("load_more_btn").classList.remove("is-active");
+      r_e("load_more_btn").classList.add("is-hidden")
+
+    }
+  }
 
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
