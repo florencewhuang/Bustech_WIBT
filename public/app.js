@@ -498,6 +498,10 @@ r_e("request-close-modal").removeEventListener("click", RequestcloseModal);
 // Add event listener for closing the modal
 r_e("request-close-modal").addEventListener("click", RequestcloseModal);
 
+r_e("request_reset").addEventListener("click", () => {
+  r_e("request_form").reset();
+});
+
 r_e("request_submit").addEventListener("click", () => {
   let request_email = r_e("request_email").value;
   let request_fname = r_e("request_fname").value;
