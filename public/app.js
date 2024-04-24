@@ -110,10 +110,6 @@ r_e("eventlibpage").addEventListener("click", () => {
   ////////////////////////////////////////////////////////////////////////////////////////////////
   show_event_library();
 
-  r_e('load_more_btn').addEventListener('click', () => {
-    //pagination_load(pages,  r_e("event_lib_results").innerHTML)
-  });
-
 
   // Event Library Event Search Code
   r_e("submit_search").addEventListener("click", () => {
@@ -181,6 +177,9 @@ function getdocs(keyword_search) {
 
     r_e("libform").reset();
   });
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //if click on load more 
   r_e("load_more_btn").addEventListener("click", () => {
@@ -693,4 +692,7 @@ function pagination_load(html_event){
     r_e("event_lib_results").innerHTML = html_event;
     load_count++;
   };
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
