@@ -115,6 +115,9 @@ r_e("eventlibpage").addEventListener("click", () => {
 
   // Event Library Event Search Code
   r_e("submit_search").addEventListener("click", () => {
+    //////////////////////////////////////////////////////////////////////////////
+    load_count = 0;
+    ////////////////////////////////////////////////////////////////////////////
     let keyword_search = r_e("keyword_search").value;
     let event_type_search = r_e("typesearch_dropdown").value;
     let date_search = r_e("search_date").value;
