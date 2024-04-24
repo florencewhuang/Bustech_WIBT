@@ -104,8 +104,15 @@ r_e("eventlibpage").addEventListener("click", () => {
   <br />
   <h2 class="results" style="font-weight: bold">Results:</h2>
   <div class="eventlib-results" id="event_lib_results">
-  </div>`;
+  </div>
+  <button class="is-active" id="load_more_btn">Load More</button>`;
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   show_event_library();
+
+  r_e('load_more_btn').addEventListener('click', () => {
+    //pagination_load(pages,  r_e("event_lib_results").innerHTML)
+  });
 
 
   // Event Library Event Search Code
@@ -114,9 +121,6 @@ r_e("eventlibpage").addEventListener("click", () => {
     let event_type_search = r_e("typesearch_dropdown").value;
     let date_search = r_e("search_date").value;
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////
     getdocs(keyword_search);
 
     let html = ``;
@@ -176,6 +180,11 @@ function getdocs(keyword_search) {
 };
 
     r_e("libform").reset();
+  });
+
+  //if click on load more 
+  r_e("load_more_btn").addEventListener("click", () => {
+    pagination_load(r_e("event_lib_results").innerHTML)
   });
 });
 
@@ -466,7 +475,7 @@ function print_event(doc) {
 }
 
 // Event Library Pulling From the Database
-function show_event_library() {
+function show_event_library4() {
   db.collection("event library")
     .get()
     .then((data) => {
@@ -511,6 +520,77 @@ function show_event_library() {
     });
 }
 
+function show_event_library6(){
+  db.collection("event library").limit(10).get().then((data) => {
+    let mydocs = data.docs;
+
+    let html_event = ``;
+
+    let doc_num = mydocs.length;
+
+    let count = 1;
+    let pages = Math.ceil(doc_num / 10);
+    console.log(pages)
+    for (let i = 0; i <10; i++) {
+      html_event += print_event_lib(mydocs[i]);
+    }
+
+    
+
+
+    // Edit & Delete Buttons in Event Library
+    const editButtons = document.querySelectorAll(".edit-btn");
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    const editModal = document.getElementById("edit-modal");
+    const deleteModal = document.getElementById("delete-modal");
+    const EditcloseModal = document.getElementById("edit-close-modal");
+    const DeletecloseModal = document.getElementById("delete-close-modal");
+
+    editButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        editModal.classList.add("is-active");
+      });
+    });
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        deleteModal.classList.add("is-active");
+      });
+    });
+
+    EditcloseModal.addEventListener("click", () => {
+      editModal.classList.remove("is-active");
+    });
+
+    DeletecloseModal.addEventListener("click", () => {
+      deleteModal.classList.remove("is-active");
+    });
+  });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+let doc_arr;
+let load_count = 0;
+
+function get_event_docs() {
+  db.collection("event library")
+  .get()
+  .then((data) => {
+    let pages = [];
+    let mydocs = data.docs;
+    let num_page = Math.ceil(mydocs.length / 10);
+    for (let i = 0; i < num_page; i++) {
+       let index_1 = i * 10;
+       let index_2 = index_1 + 10;
+       pages.push(mydocs.slice(index_1, index_2));
+      }
+
+      doc_arr = pages;
+    });
+};
+
+get_event_docs()
+
 function print_event_lib(doc) {
   if (login_status == 1) {
     return `<div class="card-container">
@@ -530,8 +610,14 @@ function print_event_lib(doc) {
       </p>
     </div>
     <div class="edit-delete-buttons">
-      <button class="edit-btn" id="edit-button">Edit</button>
-      <button class="delete-btn" id="delete-button">Delete</button>
+      <button onclick="edit_doc('${doc.id}', '${doc.data().name}', '${
+      doc.data().type
+    }', '${doc.data().date}', '${
+      doc.data().description
+    }')" class="edit-btn" id="edit-button">Edit</button>
+      <button onclick="del_doc('${
+        doc.id
+      }')" class="delete-btn" id="delete-button">Delete</button>
     </div>
   </div>
 </div>`;
@@ -556,3 +642,55 @@ function print_event_lib(doc) {
 </div>`;
   }
 }
+
+
+function show_event_library() {
+
+  let html_event = ``;
+
+        doc_arr[load_count].forEach((doc) =>{
+          html_event += print_event_lib(doc);
+        });
+
+
+        load_count = 1
+
+      r_e("event_lib_results").innerHTML = html_event;
+      // Edit & Delete Buttons in Event Library
+      const editButtons = document.querySelectorAll(".edit-btn");
+      const deleteButtons = document.querySelectorAll(".delete-btn");
+      const editModal = document.getElementById("edit-modal");
+      const deleteModal = document.getElementById("delete-modal");
+      const EditcloseModal = document.getElementById("edit-close-modal");
+      const DeletecloseModal = document.getElementById("delete-close-modal");
+
+      editButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          editModal.classList.add("is-active");
+        });
+      });
+
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          deleteModal.classList.add("is-active");
+        });
+      });
+
+      EditcloseModal.addEventListener("click", () => {
+        editModal.classList.remove("is-active");
+      });
+
+      DeletecloseModal.addEventListener("click", () => {
+        deleteModal.classList.remove("is-active");
+      });
+
+};
+
+function pagination_load(html_event){
+  doc_arr[load_count].forEach((doc) =>{
+      html_event += print_event_lib(doc);
+    })
+    r_e("event_lib_results").innerHTML = html_event;
+    load_count++;
+  };
+
