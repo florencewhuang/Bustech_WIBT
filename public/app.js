@@ -65,6 +65,7 @@ r_e("schedulepage").addEventListener("click", () => {
 
 // Load Event Lib Page
 r_e("eventlibpage").addEventListener("click", () => {
+  load_count=0;
   r_e(
     "content_page"
   ).innerHTML = `<h1 class="title">EVENT LIBRARY DATABASE SEARCH</h1>
@@ -107,7 +108,6 @@ r_e("eventlibpage").addEventListener("click", () => {
   </div>
   <button class="is-active" id="load_more_btn">Load More</button>`;
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////
   show_event_library();
 
 
