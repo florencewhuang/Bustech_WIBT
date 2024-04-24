@@ -155,6 +155,11 @@ body {
   cursor: pointer;
 }
 
+.pagbtns {
+  display: flex;
+  justify-content: center;
+}
+
 .results-headers {
   margin-top: 0;
   margin-bottom: 0;

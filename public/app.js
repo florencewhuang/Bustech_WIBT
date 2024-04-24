@@ -1,3 +1,9 @@
+// Global Vars
+let currentPage = 1;
+const eventsPerPage = 10;
+let searchCurrentPage = 1;
+const searchEventsPerPage = 10;
+
 // key functions
 function r_e(id) {
   return document.querySelector(`#${id}`);
@@ -651,391 +657,137 @@ function load_eventlib() {
   <br />
   <h2 class="results" style="font-weight: bold">Results:</h2>
   <div class="eventlib-results" id="event_lib_results">
+  </div>
+  <div class="pagbtns">
+  <button class="button" id="back_button" onclick="goToPreviousPage()">Previous Page</button>
+  <button style= "margin-left:8px" class= "button" id="load_more" onclick="loadMoreEvents()">Next Page</button>
+  <button type="button" id="prevPage" class= "button">Previous Page</button>
+  <button style= "margin-left:8px" type="button" id="nextPage" class="button">Next Page</button>
   </div>`;
   show_event_library();
-  r_e("submit_search").addEventListener("click", () => {
+
+  // Keyword Search Code Starts Here!
+
+  let page = 1;
+  const pageSize = 10;
+
+  // fetch data based on pagination and search filters
+  function fetchData() {
     let keyword_search = r_e("keyword_search").value;
     let event_type_search = r_e("typesearch_dropdown").value;
     let date_search = r_e("search_date").value;
-    // If user inputs a date and event type filter
-    if (
-      keyword_search == "" &&
-      event_type_search != "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("type", "==", event_type_search)
-        .where("date", "==", date_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
 
-          let html_event = ``;
+    let query = db.collection("event library");
 
-          let doc_num = mydocs.length;
+    // Apply filters if they are provided
+    if (event_type_search !== "Any") {
+      query = query.where("type", "==", event_type_search);
+    }
+    if (date_search !== "") {
+      query = query.where("date", "==", date_search);
+    }
 
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
+    if (keyword_search != "") {
+      query.get().then((querySnapshot) => {
+        let filteredDocs = [];
+        querySnapshot.forEach((doc) => {
+          var desc = doc.data().description;
+          var evtname = doc.data().name;
+          var wordExists = check_key(keyword_search, desc);
+          var wordExists2 = check_key(keyword_search, evtname);
+          if (wordExists || wordExists2) {
+            filteredDocs.push(doc);
           }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
         });
-    }
-    // if user inputs just a date filter
-    if (
-      keyword_search == "" &&
-      event_type_search == "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("date", "==", date_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
 
-          let html_event = ``;
+        // Calculate pagination parameters
+        let totalDocs = filteredDocs.length;
+        let totalPages = Math.ceil(totalDocs / pageSize);
+        let startIndex = (page - 1) * pageSize;
+        let endIndex = startIndex + pageSize;
+        let paginatedDocs = filteredDocs.slice(startIndex, endIndex);
 
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
+        let html_event = ``;
+        paginatedDocs.forEach((doc) => {
+          html_event += print_event_lib(doc);
         });
-    }
-    // if a user inputs just an event type
-    if (
-      keyword_search == "" &&
-      event_type_search != "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .where("type", "==", event_type_search)
-        .get()
-        .then((res) => {
-          let mydocs = res.docs;
+        r_e("event_lib_results").innerHTML = html_event;
+        updatePaginationButtons(totalPages);
+      });
+    } else {
+      query.get().then((res) => {
+        let startIndex = (page - 1) * pageSize;
+        let endIndex = startIndex + pageSize;
+        let mydocs = res.docs.slice(startIndex, endIndex);
+        totalPages = res.docs.length / pageSize;
+        let html_event = ``;
 
-          let html_event = ``;
-
-          let doc_num = mydocs.length;
-
-          let count = 1;
-          for (let i = 0; i < mydocs.length; i++) {
-            html_event += print_event_lib(mydocs[i]);
-          }
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
+        mydocs.forEach((doc) => {
+          html_event += print_event_lib(doc);
         });
+
+        r_e("event_lib_results").innerHTML = html_event;
+        updatePaginationButtons(totalPages);
+      });
     }
-    // user just filters using keyword search
-    if (
-      keyword_search != "" &&
-      event_type_search == "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .get()
-        .then(function (querySnapshot) {
-          let html_event = ``;
-          querySnapshot.forEach(function (doc) {
-            var desc = doc.data().description;
-            var evtname = doc.data().name;
-            var wordExists = check_key(keyword_search, desc);
-            var wordExists2 = check_key(keyword_search, evtname);
-            if (wordExists || wordExists2) {
-              html_event += print_event_lib(doc);
-            }
-          });
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
+  }
 
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    // if user inputs a keyword search and an event type
-    if (
-      keyword_search != "" &&
-      event_type_search != "Any" &&
-      date_search == ""
-    ) {
-      db.collection("event library")
-        .where("type", "==", event_type_search)
-        .get()
-        .then(function (querySnapshot) {
-          let html_event = ``;
-          querySnapshot.forEach(function (doc) {
-            var desc = doc.data().description;
-            var evtname = doc.data().name;
-            var wordExists = check_key(keyword_search, desc);
-            var wordExists2 = check_key(keyword_search, evtname);
-            if (wordExists || wordExists2) {
-              html_event += print_event_lib(doc);
-            }
-          });
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
+  // Function for pagination
+  function navigatePages(direction) {
+    if (direction === "prev" && page > 1) {
+      page--;
+    } else if (direction === "next") {
+      page++;
     }
 
-    // if a user inputs a keyword search and date
-    if (
-      keyword_search != "" &&
-      event_type_search == "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("date", "==", date_search)
-        .get()
-        .then(function (querySnapshot) {
-          let html_event = ``;
-          querySnapshot.forEach(function (doc) {
-            var desc = doc.data().description;
-            var evtname = doc.data().name;
-            var wordExists = check_key(keyword_search, desc);
-            var wordExists2 = check_key(keyword_search, evtname);
-            if (wordExists || wordExists2) {
-              html_event += print_event_lib(doc);
-            }
-          });
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
+    fetchData(); // Fetch data for the updated page
+  }
 
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
+  // Event listeners for search button and pagination controls
+  r_e("submit_search").addEventListener("click", () => {
+    r_e("load_more").style.display = "none";
+    r_e("back_button").style.display = "none";
 
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-
-    // if a user inputs a keyword search and date and event type
-    if (
-      keyword_search != "" &&
-      event_type_search != "Any" &&
-      date_search != ""
-    ) {
-      db.collection("event library")
-        .where("date", "==", date_search)
-        .where("type", "==", event_type_search)
-        .get()
-        .then(function (querySnapshot) {
-          let html_event = ``;
-          querySnapshot.forEach(function (doc) {
-            var desc = doc.data().description;
-            var evtname = doc.data().name;
-            var wordExists = check_key(keyword_search, desc);
-            var wordExists2 = check_key(keyword_search, evtname);
-            if (wordExists || wordExists2) {
-              html_event += print_event_lib(doc);
-            }
-          });
-          r_e("event_lib_results").innerHTML = html_event;
-          // Edit & Delete Buttons in Event Library
-          const editButtons = document.querySelectorAll(".edit-btn");
-          const deleteButtons = document.querySelectorAll(".delete-btn");
-          const editModal = document.getElementById("edit-modal");
-          const deleteModal = document.getElementById("delete-modal");
-          const EditcloseModal = document.getElementById("edit-close-modal");
-          const DeletecloseModal =
-            document.getElementById("delete-close-modal");
-
-          editButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              editModal.classList.add("is-active");
-            });
-          });
-
-          deleteButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-              deleteModal.classList.add("is-active");
-            });
-          });
-
-          EditcloseModal.addEventListener("click", () => {
-            editModal.classList.remove("is-active");
-          });
-
-          DeletecloseModal.addEventListener("click", () => {
-            deleteModal.classList.remove("is-active");
-          });
-        });
-    }
-    if (
-      keyword_search == "" &&
-      event_type_search == "Any" &&
-      date_search == ""
-    ) {
-      show_event_library();
-    }
-    r_e("libform").reset();
+    page = 1; // Reset page to 1 when a new search is triggered
+    fetchData(); // Fetch data based on new search criteria
   });
+
+  // previous page and next page buttons
+  r_e("prevPage").addEventListener("click", () => {
+    navigatePages("prev");
+  });
+
+  r_e("nextPage").addEventListener("click", () => {
+    navigatePages("next");
+  });
+
+  // Manages next and previous page button functionality
+  function updatePaginationButtons(totalPages) {
+    if (page > 1) {
+      r_e("prevPage").style.display = "inline-block";
+    } else {
+      r_e("prevPage").style.display = "none";
+    }
+
+    if (page < totalPages) {
+      r_e("nextPage").style.display = "inline-block";
+    } else {
+      r_e("nextPage").style.display = "none";
+    }
+  }
 }
 
 // Event Library Pulling From the Database
 function show_event_library() {
+  r_e("nextPage").style.display = "none";
+  r_e("prevPage").style.display = "none";
+  const startIndex = (currentPage - 1) * eventsPerPage;
+  const endIndex = startIndex + eventsPerPage;
+
   db.collection("event library")
     .get()
     .then((data) => {
-      let mydocs = data.docs;
+      let mydocs = data.docs.slice(startIndex, endIndex);
 
       let html_event = ``;
 
@@ -1046,6 +798,19 @@ function show_event_library() {
         html_event += print_event_lib(mydocs[i]);
       }
       r_e("event_lib_results").innerHTML = html_event;
+
+      // Show Load More button and back button if there are more events
+      if (currentPage > 1) {
+        r_e("back_button").style.display = "block";
+      } else {
+        r_e("back_button").style.display = "none";
+      }
+
+      if (data.docs.length > endIndex) {
+        r_e("load_more").style.display = "block";
+      } else {
+        r_e("load_more").style.display = "none";
+      }
       // Edit & Delete Buttons in Event Library
       const editButtons = document.querySelectorAll(".edit-btn");
       const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -1074,6 +839,20 @@ function show_event_library() {
         deleteModal.classList.remove("is-active");
       });
     });
+}
+
+// function to load more events
+function loadMoreEvents() {
+  currentPage++;
+  show_event_library();
+}
+
+// Function to go back a page of events
+function goToPreviousPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    show_event_library();
+  }
 }
 
 function print_event_lib(doc) {
