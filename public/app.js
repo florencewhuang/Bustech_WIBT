@@ -34,7 +34,7 @@ function check_key(word, paragraph) {
   return wordsArray.includes(word);
 }
 
-// Delete document function
+// Delete event document function
 function del_doc(id) {
   setTimeout(function () {}, 2000);
 
@@ -55,6 +55,56 @@ function del_doc(id) {
         load_eventlib();
       });
   });
+}
+
+// Delete request document function
+function del_request(id) {
+  db.collection("admin_requests")
+    .doc(id)
+    .delete()
+    .then(() => {
+      r_e(
+        "alertbody"
+      ).innerHTML = ` <p class="has-text-success-dark" id="alertmodal">Request deleted successfully.</p>`;
+      r_e("alerttitle").innerHTML = `Success`;
+      modalAlert.classList.add("is-active");
+      AlertCloseModal.addEventListener("click", () => {
+        modalAlert.classList.remove("is-active");
+      });
+      show_requests();
+    });
+}
+
+// Approve request document function
+function approve_request(id, status) {
+  if (status == "Approved") {
+    r_e(
+      "alertbody"
+    ).innerHTML = ` <p class="has-text-danger-dark" id="alertmodal">This request has already been approved.</p>`;
+    r_e("alerttitle").innerHTML = `Error`;
+    modalAlert.classList.add("is-active");
+    AlertCloseModal.addEventListener("click", () => {
+      modalAlert.classList.remove("is-active");
+    });
+    show_requests();
+  } else {
+    db.collection("admin_requests")
+      .doc(id)
+      .update({
+        status: "Approved",
+      })
+      .then(() => {
+        r_e(
+          "alertbody"
+        ).innerHTML = ` <p class="has-text-success-dark" id="alertmodal">Because you have indicated that you have given the login information to the requested user, the status of this request is changed to approved.</p>`;
+        r_e("alerttitle").innerHTML = `Success`;
+        modalAlert.classList.add("is-active");
+        AlertCloseModal.addEventListener("click", () => {
+          modalAlert.classList.remove("is-active");
+        });
+        show_requests();
+      });
+  }
 }
 
 // update document function
@@ -301,6 +351,29 @@ r_e("addeventspage").addEventListener("click", () => {
   }
 });
 
+// Load Admin Requests Page
+
+r_e("admin-request").addEventListener("click", () => {
+  if (login_status == 1) {
+    r_e(
+      "content_page"
+    ).innerHTML = `<h1 class="title">ADMIN ACCESS REQUESTS</h1>
+    <br />
+    <br />
+    <div id="requests_results"></div>`;
+    show_requests();
+  } else {
+    r_e(
+      "alertbody"
+    ).innerHTML = ` <p class="has-text-danger-dark" id="alertmodal">Only admins have access to the Admin Requests page. Please login to continue.</p>`;
+    r_e("alerttitle").innerHTML = `Error`;
+    modalAlert.classList.add("is-active");
+    AlertCloseModal.addEventListener("click", () => {
+      modalAlert.classList.remove("is-active");
+    });
+  }
+});
+
 //Login Modal Functionality
 auth.signOut();
 var login_status = 0;
@@ -409,6 +482,53 @@ r_e("signUp_btn").addEventListener("click", () => {
       r_e("login_form").reset();
     });
 });
+
+// Add event listener for closing the modal
+r_e("request-close-modal").addEventListener("click", RequestcloseModal);
+
+// Request Access Modal Functionality
+r_e("admin_request").addEventListener("click", () => {
+  r_e("modalHome").classList.remove("is-active");
+  r_e("modalAccess").classList.add("is-active");
+});
+
+// Remove the event listener from previous instances
+r_e("request-close-modal").removeEventListener("click", RequestcloseModal);
+
+// Add event listener for closing the modal
+r_e("request-close-modal").addEventListener("click", RequestcloseModal);
+
+r_e("request_submit").addEventListener("click", () => {
+  let request_email = r_e("request_email").value;
+  let request_fname = r_e("request_fname").value;
+  let request_lname = r_e("request_lname").value;
+
+  let request = {
+    first_name: request_fname,
+    last_name: request_lname,
+    email: request_email,
+    status: "Unapproved",
+  };
+
+  db.collection("admin_requests")
+    .add(request)
+    .then(() => {
+      r_e("request_form").reset();
+      r_e("modalAccess").classList.remove("is-active");
+      r_e(
+        "alertbody"
+      ).innerHTML = ` <p class="has-text-success-dark" id="alertmodal">Your request to receive the information to login as an admin was submitted. If your request is approved you will receive an email from WIBT with the login credentials.</p>`;
+      r_e("alerttitle").innerHTML = `Success`;
+      modalAlert.classList.add("is-active");
+      AlertCloseModal.addEventListener("click", () => {
+        modalAlert.classList.remove("is-active");
+      });
+    });
+});
+
+function RequestcloseModal() {
+  r_e("modalAccess").classList.remove("is-active");
+}
 
 // Get Todays Date Function
 var today = new Date();
@@ -1002,4 +1122,72 @@ function print_event_lib(doc) {
   </div>
 </div>`;
   }
+}
+
+// Pulling Admin Requests From the Data Base
+function show_requests() {
+  db.collection("admin_requests")
+    .get()
+    .then((data) => {
+      let mydocs = data.docs;
+
+      let html1 = ``;
+      let html2 = ``;
+      let html3 = ``;
+
+      let doc_num = mydocs.length;
+
+      let count = 1;
+      for (let i = 0; i < mydocs.length; i++) {
+        if (count == 1) {
+          html1 += print_request(mydocs[i]);
+        }
+        if (count == 2) {
+          html2 += print_request(mydocs[i]);
+        }
+        if (count == 3) {
+          html3 += print_request(mydocs[i]);
+        }
+
+        if (count < 3) {
+          count = count + 1;
+        } else {
+          count = 1;
+        }
+      }
+
+      let html = `<div class="columns">
+    <div class="column" id="col1">${html1}</div>
+    <div class="column">${html2}</div>
+    <div class="column" id="col3">${html3}</div>
+    </div>`;
+
+      r_e("requests_results").innerHTML = html;
+    });
+}
+
+function print_request(doc) {
+  return `
+    <div class="schedule-card-request">
+    <div class="schedule-card-container-request">
+    <button class="button is-danger" style="float:right" onclick="del_request('${
+      doc.id
+    }')">Remove</button>
+    <button class="approve button is-primary" style="float:right; margin-right:5px;" onclick="approve_request('${
+      doc.id
+    }', '${doc.data().status}')">Approve</button>
+      <h2 class="event-title"> Name: ${doc.data().first_name} ${
+    doc.data().last_name
+  }</h2>
+      <br />
+      <h3 class="schedule-date" style="font-style: italic">
+        Email: ${doc.data().email}
+      </h3>
+      <h3 class="schedule-date">
+      Status: ${doc.data().status}
+      </h3>
+      <br />
+    </div>
+  </div>
+    `;
 }

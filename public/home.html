@@ -27,6 +27,9 @@
     <li class="navelements">
       <a id="addeventspage" class="navlinks">Add Events</a>
     </li>
+    <li class="navelements">
+      <a id="admin-request" class="navlinks"> Admin Requests</a>
+    </li>
     <button class="eventlib-btn" id="login">Admin Login</button>
   </ul>
   <br />
@@ -96,6 +99,66 @@
     <br />
   </div>
 
+      <!-- Delete Request Button Modal -->
+      <div class="modal" id="delete-modal-request">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Remove Request</p>
+            <button aria-label="close" class="delete" id="delete-close-modal-request"></button>
+          </header>
+          <section class="modal-card-body">
+            <h1>Are you sure you want to remove this admin request?</h1>
+            <br>
+              <button id="confirm-delete-request" type="submit" class="button is-danger">
+                Remove
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
+
+    <!-- Request Access Modal -->
+    <div class="modal" id="modalAccess">
+      <div class="modal-background" id="modalBG"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Request Admin Access</p>
+          <button class="delete" aria-label="close" id="request-close-modal"></button>
+        </header>
+        <section class="modal-card-body">
+          <p>Please enter your information below to request the admin login information from the Exec Board. </p>
+          <br>
+          <form id="request_form">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="text" id="request_email" />
+              </div>
+            </div>
+  
+            <div class="field">
+              <label class="label">First Name</label>
+              <div class="control">
+                <input class="input" type="text" id="request_fname" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Last Name</label>
+              <div class="control">
+                <input class="input" type="text" id="request_lname" />
+              </div>
+            </div>
+          </form>
+          <br>
+          <button id="request_submit" class="button is-primary mt-1 mr-3">
+            Submit
+          </button>
+          <button id="request_reset" class="button is-danger mt-1">Reset</button>
+      </div>
+      </section>
+    </div>
+
   <!-- Login Modal -->
   <div class="modal" id="modalHome">
     <div class="modal-background" id="modalBG"></div>
@@ -127,6 +190,7 @@
           Submit
         </button>
         <button id="login_reset" class="button is-danger mt-1">Reset</button>
+        <button id="admin_request" class="button is-link mt-1 ml-3">Request Access</button>
     </div>
     </section>
     <div id="passwordcheck"></div>
