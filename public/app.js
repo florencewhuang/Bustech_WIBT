@@ -1174,16 +1174,16 @@ function print_request(doc) {
   return `
     <div class="schedule-card-request">
     <div class="schedule-card-container-request">
-    <button class="button is-danger" style="float:right" onclick="del_request('${
+    <button class="button is-danger" onclick="del_request('${
       doc.id
     }')">Remove</button>
-    <button class="approve button is-primary" style="float:right; margin-right:5px;" onclick="approve_request('${
+    <button class="approve button is-primary" style="margin-right:5px;" onclick="approve_request('${
       doc.id
     }', '${doc.data().status}')">Approve</button>
-      <h2 class="event-title"> Name: ${doc.data().first_name} ${
-    doc.data().last_name
-  }</h2>
-      <br />
+    <br />
+      <h2 class="event-title" style="margin-top:20px;"> Name: ${
+        doc.data().first_name
+      } ${doc.data().last_name}</h2>
       <h3 class="schedule-date" style="font-style: italic">
         Email: ${doc.data().email}
       </h3>
