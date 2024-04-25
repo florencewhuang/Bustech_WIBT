@@ -34,26 +34,24 @@ function img_type(event_type) {
 // keyword search function
 function check_key(word, paragraph) {
   word = word.toLowerCase();
-  words = word.split(" ")
+  words = word.split(" ");
   paragraph = paragraph.toLowerCase();
   var wordsArray = paragraph.split(" ");
-  if(words.length==1){
+  if (words.length == 1) {
     return wordsArray.includes(word);
-  }
-  else{
-    results = []
-    words.forEach(word => {
-      if(wordsArray.includes(word)){
-        results.push(word)
+  } else {
+    results = [];
+    words.forEach((word) => {
+      if (wordsArray.includes(word)) {
+        results.push(word);
       }
-    })
+    });
 
-    if(words.length==results.length){
-      return true
+    if (words.length == results.length) {
+      return true;
     }
   }
-  return false
-  
+  return false;
 }
 
 // Delete event document function
@@ -729,6 +727,33 @@ function load_eventlib() {
         });
         r_e("event_lib_results").innerHTML = html_event;
         updatePaginationButtons(totalPages);
+        // Edit & Delete Buttons in Event Library
+        const editButtons = document.querySelectorAll(".edit-btn");
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        const editModal = document.getElementById("edit-modal");
+        const deleteModal = document.getElementById("delete-modal");
+        const EditcloseModal = document.getElementById("edit-close-modal");
+        const DeletecloseModal = document.getElementById("delete-close-modal");
+
+        editButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            editModal.classList.add("is-active");
+          });
+        });
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            deleteModal.classList.add("is-active");
+          });
+        });
+
+        EditcloseModal.addEventListener("click", () => {
+          editModal.classList.remove("is-active");
+        });
+
+        DeletecloseModal.addEventListener("click", () => {
+          deleteModal.classList.remove("is-active");
+        });
       });
     } else {
       query.get().then((res) => {
@@ -744,10 +769,38 @@ function load_eventlib() {
 
         r_e("event_lib_results").innerHTML = html_event;
         updatePaginationButtons(totalPages);
+
+        // Edit & Delete Buttons in Event Library
+        const editButtons = document.querySelectorAll(".edit-btn");
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        const editModal = document.getElementById("edit-modal");
+        const deleteModal = document.getElementById("delete-modal");
+        const EditcloseModal = document.getElementById("edit-close-modal");
+        const DeletecloseModal = document.getElementById("delete-close-modal");
+
+        editButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            editModal.classList.add("is-active");
+          });
+        });
+
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            deleteModal.classList.add("is-active");
+          });
+        });
+
+        EditcloseModal.addEventListener("click", () => {
+          editModal.classList.remove("is-active");
+        });
+
+        DeletecloseModal.addEventListener("click", () => {
+          deleteModal.classList.remove("is-active");
+        });
       });
     }
 
-    r_e("dele")
+    r_e("dele");
   }
 
   // Function for pagination
@@ -857,7 +910,7 @@ function show_event_library() {
         deleteModal.classList.remove("is-active");
       });
     });
-};
+}
 
 // function to load more events
 function loadMoreEvents() {
