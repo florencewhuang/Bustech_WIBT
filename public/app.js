@@ -34,10 +34,26 @@ function img_type(event_type) {
 // keyword search function
 function check_key(word, paragraph) {
   word = word.toLowerCase();
+  words = word.split(" ")
   paragraph = paragraph.toLowerCase();
-
   var wordsArray = paragraph.split(" ");
-  return wordsArray.includes(word);
+  if(words.length==1){
+    return wordsArray.includes(word);
+  }
+  else{
+    results = []
+    words.forEach(word => {
+      if(wordsArray.includes(word)){
+        results.push(word)
+      }
+    })
+
+    if(words.length==results.length){
+      return true
+    }
+  }
+  return false
+  
 }
 
 // Delete event document function
@@ -730,6 +746,8 @@ function load_eventlib() {
         updatePaginationButtons(totalPages);
       });
     }
+
+    r_e("dele")
   }
 
   // Function for pagination
@@ -839,7 +857,7 @@ function show_event_library() {
         deleteModal.classList.remove("is-active");
       });
     });
-}
+};
 
 // function to load more events
 function loadMoreEvents() {
