@@ -10,13 +10,10 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     login_status = 1;
     login.innerHTML = "Sign Out";
-
   } else {
     login_status = 0;
   }
 });
-
-
 
 // key functions
 function r_e(id) {
@@ -176,48 +173,48 @@ function edit_doc(id, name, type, date, description) {
 // Load Home Page
 r_e("homepage").addEventListener("click", () => {
   load_home();
-//   r_e(
-//     "content_page"
-//   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
-//   <br />
-//   <br />
-//   <div>
-//     <div class="columns">
-//       <div class="column" id="homeIMG">
-//         <img src="images/logo.png" alt="WIBT logo" />
-//       </div>
+  //   r_e(
+  //     "content_page"
+  //   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+  //   <br />
+  //   <br />
+  //   <div>
+  //     <div class="columns">
+  //       <div class="column" id="homeIMG">
+  //         <img src="images/logo.png" alt="WIBT logo" />
+  //       </div>
 
-//       <div class="column-section column">
-//         <h2 class="results">About Us</h2>
-//         <div class="eventlib-results">
-//           <div class="homecard-container">
-//             <h3 class="results-headers">Our Club</h3>
-//             <p>
-//               WIBT is a club at the University of Wisconsin-Madison. The
-//               club strives to increase female representation and break down
-//               barriers in the Business Technology industry, shaping the
-//               future environment for women entering the field. This is
-//               accomplished through different events held within the club.
-//             </p>
-//           </div>
-//           <div class="homecard-container">
-//             <h3 class="results-headers">Our Purpose</h3>
-//             <p>
-//               In creating this information systems database, having a
-//               resource where members can easily access events allows for an
-//               easy retrieval of information from past events which can be
-//               seen in the Event Libarary. Additionally, click the Schedule
-//               tab to see upcoming events.
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>`;
+  //       <div class="column-section column">
+  //         <h2 class="results">About Us</h2>
+  //         <div class="eventlib-results">
+  //           <div class="homecard-container">
+  //             <h3 class="results-headers">Our Club</h3>
+  //             <p>
+  //               WIBT is a club at the University of Wisconsin-Madison. The
+  //               club strives to increase female representation and break down
+  //               barriers in the Business Technology industry, shaping the
+  //               future environment for women entering the field. This is
+  //               accomplished through different events held within the club.
+  //             </p>
+  //           </div>
+  //           <div class="homecard-container">
+  //             <h3 class="results-headers">Our Purpose</h3>
+  //             <p>
+  //               In creating this information systems database, having a
+  //               resource where members can easily access events allows for an
+  //               easy retrieval of information from past events which can be
+  //               seen in the Event Libarary. Additionally, click the Schedule
+  //               tab to see upcoming events.
+  //             </p>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>`;
 });
 
-function load_home(){
+function load_home() {
   r_e(
     "content_page"
   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
@@ -462,28 +459,27 @@ modalHome = r_e("modalHome");
 const closeModal = document.getElementById("close-modal");
 
 login.addEventListener("click", () => {
-    if (auth.currentUser != null) {
-      login_status = 0;
-      login.innerHTML = "Admin Login";
-      auth.signOut();
-      load_home();
-      //location.reload();
-  
-    } else {
-      r_e("login_form").reset();
-      modalHome.classList.add("is-active");
-    }
-  });
-  // if (login_status == 1) {
-  //   // User is signed in.
-  //   login.innerHTML = "Login";
-  //   login_status = 0;
-  //   location.reload();
-  // } else {
-  //   // No user is signed in.
-  //   r_e("login_form").reset();
-  //   modalHome.classList.add("is-active");
-  // }
+  if (auth.currentUser != null) {
+    login_status = 0;
+    login.innerHTML = "Admin Login";
+    auth.signOut();
+    load_home();
+    //location.reload();
+  } else {
+    r_e("login_form").reset();
+    modalHome.classList.add("is-active");
+  }
+});
+// if (login_status == 1) {
+//   // User is signed in.
+//   login.innerHTML = "Login";
+//   login_status = 0;
+//   location.reload();
+// } else {
+//   // No user is signed in.
+//   r_e("login_form").reset();
+//   modalHome.classList.add("is-active");
+// }
 
 closeModal.addEventListener("click", () => {
   modalHome.classList.remove("is-active");
@@ -790,38 +786,45 @@ function load_eventlib() {
         let paginatedDocs = filteredDocs.slice(startIndex, endIndex);
 
         let html_event = ``;
-        paginatedDocs.forEach((doc) => {
-          html_event += print_event_lib(doc);
-        });
-        r_e("event_lib_results").innerHTML = html_event;
-        updatePaginationButtons(totalPages);
-        // Edit & Delete Buttons in Event Library
-        const editButtons = document.querySelectorAll(".edit-btn");
-        const deleteButtons = document.querySelectorAll(".delete-btn");
-        const editModal = document.getElementById("edit-modal");
-        const deleteModal = document.getElementById("delete-modal");
-        const EditcloseModal = document.getElementById("edit-close-modal");
-        const DeletecloseModal = document.getElementById("delete-close-modal");
 
-        editButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            editModal.classList.add("is-active");
+        if (paginatedDocs.length > 0) {
+          paginatedDocs.forEach((doc) => {
+            html_event += print_event_lib(doc);
           });
-        });
+          r_e("event_lib_results").innerHTML = html_event;
+          updatePaginationButtons(totalPages);
+          // Edit & Delete Buttons in Event Library
+          const editButtons = document.querySelectorAll(".edit-btn");
+          const deleteButtons = document.querySelectorAll(".delete-btn");
+          const editModal = document.getElementById("edit-modal");
+          const deleteModal = document.getElementById("delete-modal");
+          const EditcloseModal = document.getElementById("edit-close-modal");
+          const DeletecloseModal =
+            document.getElementById("delete-close-modal");
 
-        deleteButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            deleteModal.classList.add("is-active");
+          editButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              editModal.classList.add("is-active");
+            });
           });
-        });
 
-        EditcloseModal.addEventListener("click", () => {
-          editModal.classList.remove("is-active");
-        });
+          deleteButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              deleteModal.classList.add("is-active");
+            });
+          });
 
-        DeletecloseModal.addEventListener("click", () => {
-          deleteModal.classList.remove("is-active");
-        });
+          EditcloseModal.addEventListener("click", () => {
+            editModal.classList.remove("is-active");
+          });
+
+          DeletecloseModal.addEventListener("click", () => {
+            deleteModal.classList.remove("is-active");
+          });
+        } else {
+          html_event += `No results found for search and filter inputs. Please adjust your search and try again.`;
+          r_e("event_lib_results").innerHTML = html_event;
+        }
       });
     } else {
       query.get().then((res) => {
@@ -831,40 +834,46 @@ function load_eventlib() {
         totalPages = res.docs.length / pageSize;
         let html_event = ``;
 
-        mydocs.forEach((doc) => {
-          html_event += print_event_lib(doc);
-        });
-
-        r_e("event_lib_results").innerHTML = html_event;
-        updatePaginationButtons(totalPages);
-
-        // Edit & Delete Buttons in Event Library
-        const editButtons = document.querySelectorAll(".edit-btn");
-        const deleteButtons = document.querySelectorAll(".delete-btn");
-        const editModal = document.getElementById("edit-modal");
-        const deleteModal = document.getElementById("delete-modal");
-        const EditcloseModal = document.getElementById("edit-close-modal");
-        const DeletecloseModal = document.getElementById("delete-close-modal");
-
-        editButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            editModal.classList.add("is-active");
+        if (mydocs.length > 0) {
+          mydocs.forEach((doc) => {
+            html_event += print_event_lib(doc);
           });
-        });
 
-        deleteButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            deleteModal.classList.add("is-active");
+          r_e("event_lib_results").innerHTML = html_event;
+          updatePaginationButtons(totalPages);
+
+          // Edit & Delete Buttons in Event Library
+          const editButtons = document.querySelectorAll(".edit-btn");
+          const deleteButtons = document.querySelectorAll(".delete-btn");
+          const editModal = document.getElementById("edit-modal");
+          const deleteModal = document.getElementById("delete-modal");
+          const EditcloseModal = document.getElementById("edit-close-modal");
+          const DeletecloseModal =
+            document.getElementById("delete-close-modal");
+
+          editButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              editModal.classList.add("is-active");
+            });
           });
-        });
 
-        EditcloseModal.addEventListener("click", () => {
-          editModal.classList.remove("is-active");
-        });
+          deleteButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              deleteModal.classList.add("is-active");
+            });
+          });
 
-        DeletecloseModal.addEventListener("click", () => {
-          deleteModal.classList.remove("is-active");
-        });
+          EditcloseModal.addEventListener("click", () => {
+            editModal.classList.remove("is-active");
+          });
+
+          DeletecloseModal.addEventListener("click", () => {
+            deleteModal.classList.remove("is-active");
+          });
+        } else {
+          html_event += `No results found for search and filter inputs. Please adjust your search and try again.`;
+          r_e("event_lib_results").innerHTML = html_event;
+        }
       });
     }
 
