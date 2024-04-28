@@ -4,6 +4,20 @@ const eventsPerPage = 10;
 let searchCurrentPage = 1;
 const searchEventsPerPage = 10;
 
+//auth.signOut();
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    login_status = 1;
+    login.innerHTML = "Sign Out";
+
+  } else {
+    login_status = 0;
+  }
+});
+
+
+
 // key functions
 function r_e(id) {
   return document.querySelector(`#${id}`);
@@ -163,6 +177,49 @@ function edit_doc(id, name, type, date, description) {
 
 // Load Home Page
 r_e("homepage").addEventListener("click", () => {
+  load_home();
+//   r_e(
+//     "content_page"
+//   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
+//   <br />
+//   <br />
+//   <div>
+//     <div class="columns">
+//       <div class="column" id="homeIMG">
+//         <img src="images/logo.png" alt="WIBT logo" />
+//       </div>
+
+//       <div class="column-section column">
+//         <h2 class="results">About Us</h2>
+//         <div class="eventlib-results">
+//           <div class="homecard-container">
+//             <h3 class="results-headers">Our Club</h3>
+//             <p>
+//               WIBT is a club at the University of Wisconsin-Madison. The
+//               club strives to increase female representation and break down
+//               barriers in the Business Technology industry, shaping the
+//               future environment for women entering the field. This is
+//               accomplished through different events held within the club.
+//             </p>
+//           </div>
+//           <div class="homecard-container">
+//             <h3 class="results-headers">Our Purpose</h3>
+//             <p>
+//               In creating this information systems database, having a
+//               resource where members can easily access events allows for an
+//               easy retrieval of information from past events which can be
+//               seen in the Event Libarary. Additionally, click the Schedule
+//               tab to see upcoming events.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>`;
+});
+
+function load_home(){
   r_e(
     "content_page"
   ).innerHTML = `      <h1 class="title">WOMEN IN BUSINESS TECHNOLOGY</h1>
@@ -202,7 +259,7 @@ r_e("homepage").addEventListener("click", () => {
     </div>
   </div>
 </div>`;
-});
+}
 
 // Load Schedule Page
 r_e("schedulepage").addEventListener("click", () => {
@@ -397,7 +454,7 @@ r_e("admin-request").addEventListener("click", () => {
 });
 
 //Login Modal Functionality
-auth.signOut();
+// auth.signOut();
 var login_status = 0;
 
 login = r_e("login");
@@ -407,17 +464,28 @@ modalHome = r_e("modalHome");
 const closeModal = document.getElementById("close-modal");
 
 login.addEventListener("click", () => {
-  if (login_status == 1) {
-    // User is signed in.
-    login.innerHTML = "Login";
-    login_status = 0;
-    location.reload();
-  } else {
-    // No user is signed in.
-    r_e("login_form").reset();
-    modalHome.classList.add("is-active");
-  }
-});
+    if (auth.currentUser != null) {
+      login_status = 0;
+      login.innerHTML = "Admin Login";
+      auth.signOut();
+      load_home();
+      //location.reload();
+  
+    } else {
+      r_e("login_form").reset();
+      modalHome.classList.add("is-active");
+    }
+  });
+  // if (login_status == 1) {
+  //   // User is signed in.
+  //   login.innerHTML = "Login";
+  //   login_status = 0;
+  //   location.reload();
+  // } else {
+  //   // No user is signed in.
+  //   r_e("login_form").reset();
+  //   modalHome.classList.add("is-active");
+  // }
 
 closeModal.addEventListener("click", () => {
   modalHome.classList.remove("is-active");
