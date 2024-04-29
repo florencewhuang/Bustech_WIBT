@@ -824,6 +824,7 @@ function load_eventlib() {
         } else {
           html_event += `No results found for search and filter inputs. Please adjust your search and try again.`;
           r_e("event_lib_results").innerHTML = html_event;
+          updatePaginationButtons(totalPages);
         }
       });
     } else {
@@ -873,6 +874,7 @@ function load_eventlib() {
         } else {
           html_event += `No results found for search and filter inputs. Please adjust your search and try again.`;
           r_e("event_lib_results").innerHTML = html_event;
+          updatePaginationButtons(totalPages);
         }
       });
     }
