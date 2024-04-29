@@ -301,6 +301,7 @@ function event_page() {
   </form>
   <div class="submit-btn-container">
   <input class="eventlib-btn" id="submit_search" type="submit" value="Submit" />
+  <input class="eventlib-btn" id="reset_search" type="submit" value="Reset Search" />
 </div>
   <br />
   <br />
@@ -730,6 +731,7 @@ function load_eventlib() {
   </form>
   <div class="submit-btn-container">
   <input class="eventlib-btn" id="submit_search" type="submit" value="Submit" />
+  <input class="eventlib-btn" id="reset_search" type="submit" value="Reset Search" />
 </div>
   <br />
   <br />
@@ -748,6 +750,10 @@ function load_eventlib() {
 
   let page = 1;
   const pageSize = 10;
+
+  r_e("reset_search").addEventListener("click", ()=> {
+    load_eventlib();
+  })
 
   // fetch data based on pagination and search filters
   function fetchData() {
